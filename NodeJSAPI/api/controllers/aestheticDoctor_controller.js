@@ -1,68 +1,65 @@
-const User  = require('../models/aestheticDoctor')
+const AestheticDoctor  = require('../models/aestheticDoctor')
+const Patient = require('../models/patient')
 const bcrypt = require("bcryptjs");
 
 // ************************* To register a seller account **************************
-exports.addUser =  async  (req,res) => {
-    const {fullName,address,contactNo,email,password} = req.body
+exports.addPatient =  async  (req,res) => {
+    const {
+        admissionNo,admissionDate,firstName,lastName,dob,address,email,
+        contactNo, disease, treatment,additionalDetails
+    } = req.body
 
-    if(fullName===""||email===""||password===""){
+    if(
+        admissionNo===""||admissionDate===""||firstName===""||lastName===""||dob===""||address===""||
+        email===""||contactNo===""||disease===""||treatment===""||additionalDetails===""
+    ){
         res.json({Status: "Unsuccessful", Message: "All the data must be entered."})
     }else{
         console.log(email)
-        const user = new User({
-            fullName,
-            email,
-            password
+        const patient = new Patient({
+            admissionNo,admissionDate,firstName,lastName,dob,address,email,
+            contactNo, disease, treatment,additionalDetails
         })
 
-        User.find({email:email})
-        .then(user=>{
-            console.log(user)
-            if(user.length>0){
+        Patient.find({email:email})
+        .then(patient=>{
+            if(patient.length>0){
                 res.json({
                     Status: "Unsuccessful",
-                    Message: "There is a user with this email address already."
+                    Message: "There is a patient with this email address already."
                 })
             }else{
-                const newUser = new User({fullName,email,password})
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        newUser.password = hash;
-                        newUser.save()
-                        .then(responseSavingUser => {
-                            console.log(responseSavingUser)
-                            res.json({
-                                Status: "Successful",
-                                Message: 'User has been registered successfully.',
-                                User: responseSavingUser
-                            })
-                        })
-                        .catch(error => {
-                            res.json({
-                                Status: "Unsuccessful",
-                                Message: "Happened saving the user in " +
-                                    "DB.",
-                                error: error.Message
-                            })
+                patient.save()
+                    .then(response=>{
+                        res.json({
+                            Status: "Successful",
+                            Message: 'Patient has been savedsuccessfully.',
+                            User: response
                         })
                     })
-                })
+                    .catch(error=>{
+                        res.json({
+                            Status: "Unsuccessful",
+                            Message: "Happened saving the patient in " +
+                                "DB.",
+                            error: error.Message
+                        })
+                    })
             }
         })
         .catch(error=>{
             console.log("HI"+error)
             res.json({
                 Status: "Unsuccessful",
-                Message: "Happened finding the user in " +
+                Message: "Happened finding the patient in " +
                     "DB.",
                 error: error
             })
         })
     }
 }
-// ****************************** To login to a user account ******************************
-exports.signin = async (req, res) => {
+// ****************************** To login to a doctor account ******************************
+exports.login = async (req, res) => {
     const {email, password} = req.body;
 
     //Validation
@@ -71,40 +68,24 @@ exports.signin = async (req, res) => {
     }
 
     //Check for existing user
-    User.findOne({email: req.body.email})
-        .then(user => {
-            if (!user) {
+    AestheticDoctor.findOne({email: req.body.email})
+        .then(doctor => {
+            if (!doctor) {
                 res.json({Status: "Unsuccessful", Message: 'Invalid user email.'})
             } else {
                 //Validating password
-                bcrypt.compare(password, user.password)
+                bcrypt.compare(password, doctor.password)
                     .then(isMatch => {
                         if (!isMatch) {
                             res.json({Status: "Unsuccessful", Message: "Password is incorrect."})
                         } else {
                             res.json({
                                 Status: "Successful",
-                                Message: 'User has been registered successfully.',
-                                User: user
+                                Message: 'The Aesthetic doctor has been logged successfully.',
+                                User: doctor
                             })
                         }
                     });
             }
-        })
-}
-
-exports.getUsers = async (req,res) =>{
-    User.find()
-        .then(users=>{
-            res.json({
-                "Status":"Successful",
-                "Users": users
-            })
-        })
-        .catch(error=>{
-            res.json({
-                "Status":"Unsuccessful",
-                "Error": error
-            })
         })
 }

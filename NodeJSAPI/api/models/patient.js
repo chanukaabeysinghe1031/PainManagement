@@ -36,7 +36,7 @@ const patientsSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    treatments:{
+    treatment:{
         type:String,
         required:true
     },
