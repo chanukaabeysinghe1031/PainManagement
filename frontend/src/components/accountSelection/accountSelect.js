@@ -28,7 +28,7 @@ class AccountSelect extends Component {
         }else if(this.state.reDirectToNurseLogin){
 
         }else if(this.state.reDirectToDoctorLogin){
-
+            return <Navigate to="/doctorLogin"/>
         } else {
             return (
                 <div className="selectAccountMain">
@@ -39,7 +39,7 @@ class AccountSelect extends Component {
                         <h3 className="userTitle">Specialist</h3>
                     </div>
                     <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToSpecialistLogin:true})
+                        this.setState({reDirectToDoctorLogin:true})
                     }}>
                         <img src={doctorImage} alt="logo" className="userImage" />
                         <h3 className="userTitle">Aesthetic Doctor</h3>
