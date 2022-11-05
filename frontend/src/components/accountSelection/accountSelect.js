@@ -22,11 +22,11 @@ class AccountSelect extends Component {
 
     render() {
         if (this.state.reDirectToSpecialistLogin) {
-            return <Navigate to="/login"/>
+            return <Navigate to="/specialistLogin"/>
         }else if(this.state.reDirectToAdminLogin){
             return <Navigate to="/adminLogin"/>
         }else if(this.state.reDirectToNurseLogin){
-
+            return <Navigate to="/nurseLogin"/>
         }else if(this.state.reDirectToDoctorLogin){
             return <Navigate to="/doctorLogin"/>
         } else {

@@ -13,6 +13,8 @@ import AddNurse from "./components/addNurse/addNurse";
 import AddDoctor from "./components/addDoctor/addDoctor";
 import DoctorHome from "./components/doctorHome/doctorHome";
 import DoctorLogin from "./components/doctorLogin/doctorLogin";
+import SpecialistLogin from "./components/specialistLogin/specialistLogin";
+import SpecialistHome from "./components/specialistHome/specialistHome";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +29,8 @@ root.render(
             <Route path="/addDoctor" element={<AddDoctor/>} />
             <Route path="/doctorHome" element={<DoctorHome/>} />
             <Route path="/doctorLogin" element={<DoctorLogin/>} />
+            <Route path="/specialistLogin" element={<SpecialistLogin/>} />
+            <Route path="/specialistHome" element={<SpecialistHome/>} />
         </Routes>
     </BrowserRouter>,
 );

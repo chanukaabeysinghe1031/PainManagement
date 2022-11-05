@@ -1,4 +1,6 @@
 const Specialist  = require("../models/specialist")
+const Patient  = require("../models/patient")
+
 const bcrypt = require("bcryptjs");
 
 // ****************************** To login to a doctor account ******************************
@@ -31,5 +33,25 @@ exports.login = async (req, res) => {
                         }
                     });
             }
+        })
+}
+
+exports.getPatients = async (req,res) => {
+    Patient.find()
+        .then(response => {
+            res.json({
+                Status: "Successful",
+                Message: 'Patients have been received',
+                Patients: response
+            })
+        })
+        .catch(error=>{
+            console.log(error)
+            res.json({
+                Status: "Unsuccessful",
+                Message: "Happened getting the patients from " +
+                    "DB.",
+                error: error.Message
+            })
         })
 }
