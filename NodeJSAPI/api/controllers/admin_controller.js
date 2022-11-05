@@ -43,6 +43,7 @@ exports.addAdmin =  async  (req,res) => {
                                     })
                                 })
                                 .catch(error => {
+                                    console.log(error)
                                     res.json({
                                         Status: "Unsuccessful",
                                         Message: "Happened saving the admin in " +
@@ -55,6 +56,7 @@ exports.addAdmin =  async  (req,res) => {
                 }
             })
             .catch(error=>{
+                console.log(error)
                 res.json({
                     Status: "Unsuccessful",
                     Message: "Happened finding the aesthetic doctor in " +
@@ -159,6 +161,7 @@ exports.addSpecialist =  async  (req,res) => {
                                     })
                                 })
                                 .catch(error => {
+                                    console.log(error)
                                     res.json({
                                         Status: "Unsuccessful",
                                         Message: "Happened saving the specialist in " +

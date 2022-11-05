@@ -1,0 +1,58 @@
+.adminHomeMain{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.userDiv{
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: 60%;
+    margin-top: 30%;
+    cursor: pointer;
+}
+.userDiv:hover{
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: 50%;
+    background-color: green;
+    /*opacity: 0.5;*/
+}
+.userImage{
+    width: 200px;
+    margin-left: 15%;
+    margin-top: 30%;
+    height: 200px;
+    border-radius: 100%;
+    opacity: 1;
+    cursor: pointer;
+}
+.userImage:hover{
+    opacity: 0.7;
+}
+.userTitle{
+    text-align: center;
+    color: white;
+}
+.adminLogoutButtonText{
+    position: absolute;
+    bottom: 100px;
+    left: 45%;
+    cursor: pointer;
+    background-color: red;
+    padding: 10px;
+    width: 10%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+.adminLogoutButtonText:hover{
+    background-color: green;
+}
