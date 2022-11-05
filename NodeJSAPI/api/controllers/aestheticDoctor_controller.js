@@ -22,8 +22,8 @@ exports.addPatient =  async  (req,res) => {
         })
 
         Patient.find({email:email})
-        .then(patient=>{
-            if(patient.length>0){
+        .then(oldPatient=>{
+            if(oldPatient.length>0){
                 res.json({
                     Status: "Unsuccessful",
                     Message: "There is a patient with this email address already."

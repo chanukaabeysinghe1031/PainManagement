@@ -11,6 +11,7 @@ import AdminHome from "./components/adminHome/adminHome";
 import AddSpecialist from "./components/addSpecialist/addSpecialist";
 import AddNurse from "./components/addNurse/addNurse";
 import AddDoctor from "./components/addDoctor/addDoctor";
+import DoctorHome from "./components/doctorHome/doctorHome";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
             <Route path="/addSpecialist" element={<AddSpecialist/>} />
             <Route path="/addNurse" element={<AddNurse/>} />
             <Route path="/addDoctor" element={<AddDoctor/>} />
+            <Route path="/doctorHome" element={<DoctorHome/>} />
         </Routes>
     </BrowserRouter>,
 );

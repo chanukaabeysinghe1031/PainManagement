@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from "react";
-import LoginPage from "./components/loginPage/loginPage";
+import AccountSelect from "./components/accountSelection/accountSelect";
 
 function App() {
   const [user, setUser] = useState({name: "", email: "", token: "", id: "", role: ""});
@@ -21,7 +21,7 @@ function App() {
 
 
   return (
-      <LoginPage/>
+      <AccountSelect/>
   );
 }
 
