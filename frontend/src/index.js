@@ -15,6 +15,9 @@ import DoctorHome from "./components/doctorHome/doctorHome";
 import DoctorLogin from "./components/doctorLogin/doctorLogin";
 import SpecialistLogin from "./components/specialistLogin/specialistLogin";
 import SpecialistHome from "./components/specialistHome/specialistHome";
+import NurseLogin from "./components/nurseLogin/nurseLogin";
+import NurseHome from "./components/nurseHome/nurseHome";
+import AddPainRecord from "./components/addPainRecord/addPainRecord";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -31,6 +34,9 @@ root.render(
             <Route path="/doctorLogin" element={<DoctorLogin/>} />
             <Route path="/specialistLogin" element={<SpecialistLogin/>} />
             <Route path="/specialistHome" element={<SpecialistHome/>} />
+            <Route path="/nurseLogin" element={<NurseLogin/>} />
+            <Route path="/nurseHome" element={<NurseHome/>} />
+            <Route path="/addPainRecord" element={<AddPainRecord/>} />
         </Routes>
     </BrowserRouter>,
 );

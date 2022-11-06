@@ -45,7 +45,7 @@ class AccountSelect extends Component {
                         <h3 className="userTitle">Aesthetic Doctor</h3>
                     </div>
                     <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToSpecialistLogin:true})
+                        this.setState({reDirectToNurseLogin:true})
                     }}>
                         <img src={nurseImage} alt="logo" className="userImage" />
                         <h3 className="userTitle">Nurse</h3>

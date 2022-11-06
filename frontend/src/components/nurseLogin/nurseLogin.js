@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import './specialistLogin.css'
+import './nurseLogin.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
-import speicalistImage from "../../images/specialist.jpeg";
+import nurseImage from "../../images/nurse.jpeg";
 
 
-class SpecialistLogin extends Component {
+class NurseLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ class SpecialistLogin extends Component {
         if (this.state.loginDetails.email === "" || this.state.loginDetails.password === "") {
             this.setState({error: "Please Fill all Required Fields"})
         } else {
-            axios.post("http://localhost:3006/api/specialists/login", {
+            axios.post("http://localhost:3006/api/nurses/login", {
                     email: this.state.loginDetails.email,
                     password: this.state.loginDetails.password
                 }).then(response => {
@@ -47,15 +47,15 @@ class SpecialistLogin extends Component {
 
     render() {
         if (this.state.reDirectToAdminHome) {
-            return <Navigate to="/specialistHome"/>
+            return <Navigate to="/nurseHome"/>
         } else if (this.state.reDirectToAccountSelect) {
             return <Navigate to="/selectAccount"/>
         } else {
             return (
                 <div className="adminLoginForm">
-                    <img src={speicalistImage} alt="logo" className="adminLoginImage" />
+                    <img src={nurseImage} alt="logo" className="adminLoginImage" />
                     <form className="subLoginForm" onSubmit={this.login}>
-                        <h1 className="loginformTitle">WELCOME SPECIALIST</h1>
+                        <h1 className="loginformTitle">WELCOME NURSE</h1>
                         <div className="loginError">{this.state.error}</div>
                         <div className="loginformtextbox">
                             <h5 className="loginLabel">Email</h5>
@@ -112,4 +112,4 @@ class SpecialistLogin extends Component {
     }
 }
 
-export default SpecialistLogin;
+export default NurseLogin;

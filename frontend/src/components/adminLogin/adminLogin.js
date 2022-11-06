@@ -95,7 +95,7 @@ class AdminLogin extends Component {
                             />
                         </div>
                         <div className="loginformtextbox">
-                            <h5 className="loginLabel">Email</h5>
+                            <h5 className="loginLabel">Password</h5>
                             <input
                                 className="loginFormTextInput"
                                 onChange={(e) =>

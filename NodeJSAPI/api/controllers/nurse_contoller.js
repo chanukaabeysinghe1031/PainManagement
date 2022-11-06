@@ -1,5 +1,6 @@
 const Nurse  = require("../models/nurse")
 const bcrypt = require("bcryptjs");
+const Patient = require("../models/patient");
 
 // ****************************** To login to a nurse account ******************************
 exports.login = async (req, res) => {
@@ -31,4 +32,62 @@ exports.login = async (req, res) => {
                     });
             }
         })
+}
+
+// ************************* To register a seller account **************************
+exports.addPainRecord =  async  (req,res) => {
+    const {
+        patientId,date,details,treatment
+    } = req.body
+
+    if(
+        patientId===""||date===""||details===""||treatment===""
+    ){
+        res.json({Status: "Unsuccessful", Message: "All the data must be entered."})
+    }else{
+
+        Patient.findById(patientId)
+            .then(patient=>{
+                if(patient===null){
+                    res.json({
+                        Status: "Unsuccessful",
+                        Message: "There is no patient with this id."
+                    })
+                }else{
+                    let newPains = []
+                    newPains = patient.painsDetected
+                    newPains.push({
+                        date:date,
+                        details:details,
+                        treatment:treatment
+                    })
+                    patient.painsDetected = newPains
+                    patient.save()
+                        .then(savedPatient=>{
+                            res.json({
+                                Status: "Successful",
+                                Message: 'Pain record has been recorded.',
+                                User: savedPatient
+                            })
+                        })
+                        .catch(error=>{
+                            res.json({
+                                Status: "Unsuccessful",
+                                Message: "Happened saving the patient in " +
+                                    "DB.",
+                                error: error
+                            })
+                        })
+                }
+            })
+            .catch(error=>{
+                console.log("HI"+error)
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened finding the patient in " +
+                        "DB.",
+                    error: error
+                })
+            })
+    }
 }

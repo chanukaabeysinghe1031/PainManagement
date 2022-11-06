@@ -1,17 +1,20 @@
 import React, {Component} from 'react';
-import './specialistLogin.css'
+import './addPainRecord.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
-import speicalistImage from "../../images/specialist.jpeg";
 
 
-class SpecialistLogin extends Component {
+class AddPainRecord extends Component {
+
     constructor(props) {
+        let patientId = localStorage.getItem('patientId')
         super(props);
         this.state = {
-            loginDetails: {
-                email: "",
-                password: ""
+            painDetails: {
+                patientId:patientId,
+                date:"",
+                details:"",
+                treatment:""
             },
             reDirectToAccountSelect: false,
             reDirectToAdminHome: false,
@@ -20,20 +23,17 @@ class SpecialistLogin extends Component {
 
     login = (event) => {
         event.preventDefault();
-        if (this.state.loginDetails.email === "" || this.state.loginDetails.password === "") {
+        if (this.state.painDetails.patientId === "" || this.state.painDetails.date === "" ||
+            this.state.painDetails.details === "" || this.state.painDetails.treatment === ""
+        ) {
             this.setState({error: "Please Fill all Required Fields"})
         } else {
-            axios.post("http://localhost:3006/api/specialists/login", {
-                    email: this.state.loginDetails.email,
-                    password: this.state.loginDetails.password
-                }).then(response => {
+            axios.post("http://localhost:3006/api/nurses/addPainRecord",this.state.painDetails )
+                .then(response => {
                     const status = response.data.Status
                     const message = response.data.Message
                     if (status === "Successful") {
-                        const data = response.data.User;
-                        console.log(data)
-                        localStorage.setItem('user', JSON.stringify(data))
-                        this.setState({reDirectToAdminHome: true})
+                        this.setState({reDirectToAccountSelect: true})
                     } else {
                         this.setState({error: message})
                     }
@@ -47,62 +47,76 @@ class SpecialistLogin extends Component {
 
     render() {
         if (this.state.reDirectToAdminHome) {
-            return <Navigate to="/specialistHome"/>
+            return <Navigate to="/nurseHome"/>
         } else if (this.state.reDirectToAccountSelect) {
-            return <Navigate to="/selectAccount"/>
+            return <Navigate to="/nurseHome"/>
         } else {
             return (
                 <div className="adminLoginForm">
-                    <img src={speicalistImage} alt="logo" className="adminLoginImage" />
                     <form className="subLoginForm" onSubmit={this.login}>
-                        <h1 className="loginformTitle">WELCOME SPECIALIST</h1>
+                        <h1 className="loginformTitle">Add Pain Record</h1>
                         <div className="loginError">{this.state.error}</div>
                         <div className="loginformtextbox">
-                            <h5 className="loginLabel">Email</h5>
+                            <h5 className="loginLabel">Date</h5>
                             <input
                                 className="loginFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
-                                        loginDetails: {
-                                            ...this.state.loginDetails,
-                                            email: e.target.value
+                                        painDetails: {
+                                            ...this.state.painDetails,
+                                            date: e.target.value
                                         }
                                     })
                                 }
-                                value={this.state.loginDetails.email}
+                                value={this.state.painDetails.date}
                                 type="text"
-                                placeholder="Email"
+                                placeholder="Date"
                             />
                         </div>
                         <div className="loginformtextbox">
-                            <h5 className="loginLabel">Password</h5>
+                            <h5 className="loginLabel">Details</h5>
                             <input
                                 className="loginFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
-                                        loginDetails: {
-                                            ...this.state.loginDetails,
-                                            password: e.target.value
+                                        painDetails: {
+                                            ...this.state.painDetails,
+                                            details: e.target.value
                                         }
                                     })
                                 }
-                                value={this.state.loginDetails.password}
-                                type="password"
-                                placeholder="Password"
+                                value={this.state.painDetails.details}
+                                placeholder="Details"
+                            />
+                        </div>
+                        <div className="loginformtextbox">
+                            <h5 className="loginLabel">Treatment</h5>
+                            <input
+                                className="loginFormTextInput"
+                                onChange={(e) =>
+                                    this.setState({
+                                        painDetails: {
+                                            ...this.state.painDetails,
+                                            treatment: e.target.value
+                                        }
+                                    })
+                                }
+                                value={this.state.painDetails.treatment}
+                                placeholder="Treatment"
                             />
                         </div>
                         <div className="loginformtextbox">
                             <input
                                 type="submit"
                                 className="loginbutton"
-                                value="Login"
+                                value="Record pain of the patient"
                             />
                         </div>
                         <input
                             type="button"
                             onClick={() => this.setState({reDirectToAccountSelect: true})}
                             className="gotoRegisterButton"
-                            value="Select Account Type"
+                            value="Back"
                         />
                     </form>
 
@@ -112,4 +126,4 @@ class SpecialistLogin extends Component {
     }
 }
 
-export default SpecialistLogin;
+export default AddPainRecord;
