@@ -6,6 +6,7 @@ import doctorImage from "../../images/doctor.jpeg";
 import nurseImage from  "../../images/nurse.jpeg";
 import specialistImage from "../../images/specialist.jpeg";
 import adminImage from "../../images/admin.png";
+import { EqualHeight, EqualHeightElement } from 'react-equal-height';
 
 
 class AccountSelect extends Component {
@@ -31,32 +32,35 @@ class AccountSelect extends Component {
             return <Navigate to="/doctorLogin"/>
         } else {
             return (
-                <div className="selectAccountMain">
-                    <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToSpecialistLogin:true})
-                    }}>
-                        <img src={specialistImage} alt="logo" className="userImage" />
-                        <h3 className="userTitle">Specialist</h3>
-                    </div>
-                    <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToDoctorLogin:true})
-                    }}>
-                        <img src={doctorImage} alt="logo" className="userImage" />
-                        <h3 className="userTitle">Aesthetic Doctor</h3>
-                    </div>
-                    <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToNurseLogin:true})
-                    }}>
-                        <img src={nurseImage} alt="logo" className="userImage" />
-                        <h3 className="userTitle">Nurse</h3>
-                    </div >
-                    <div className="userDiv" onClick={()=>{
-                        this.setState({reDirectToAdminLogin:true})
-                    }}>
-                        <img src={adminImage} alt="logo" className="userImage" />
-                        <h3 className="userTitle">Admin</h3>
-                    </div>
+                <div className="WelcomeMainBody">
+                    <h1 className="welcomeTitle">Pain Management System</h1>
+                    <div className="selectAccountMain">
+                        <div className="welcomeUserDiv" onClick={()=>{
+                            this.setState({reDirectToSpecialistLogin:true})
+                        }}>
+                            <img src={specialistImage} alt="logo" className="userImage" />
+                            <h3 className="welcomeUserTitle">Specialist</h3>
+                        </div>
+                        <div className="welcomeUserDiv" onClick={()=>{
+                            this.setState({reDirectToDoctorLogin:true})
+                        }}>
+                            <img src={doctorImage} alt="logo" className="userImage" />
+                            <h3 className="welcomeUserTitle">Aesthetic Doctor</h3>
+                        </div>
+                        <div className="welcomeUserDiv" onClick={()=>{
+                            this.setState({reDirectToNurseLogin:true})
+                        }}>
+                            <img src={nurseImage} alt="logo" className="userImage" />
+                            <h3 className="welcomeUserTitle">Nurse</h3>
+                        </div >
+                        <div className="welcomeUserDiv" onClick={()=>{
+                            this.setState({reDirectToAdminLogin:true})
+                        }}>
+                            <img src={adminImage} alt="logo" className="userImage" />
+                            <h3 className="welcomeUserTitle">Admin</h3>
+                        </div>
 
+                    </div>
                 </div>
             );
         }

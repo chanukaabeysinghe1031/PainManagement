@@ -1,21 +1,24 @@
-.adminLoginForm{
+.loginLoginForm{
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: blue;
+    background-color: white;
+
 }
-.adminLoginImage{
+.loginLoginImage{
     position: absolute;
     width: 200px;
     height: 200px;
     top:100px;
     left: 150px;
     border-radius: 200px;
+    border: 10px solid blue;
+    box-shadow: 0px 0px 20px 1px blue;
 }
 
-.subLoginForm {
+.loginSubLoginForm {
     position: absolute;
     left: 20%;
     bottom: 20px;
@@ -29,9 +32,9 @@
     /*//#1e272e*/
 }
 
-.loginformTitle {
-
-    color: white;
+.loginLoginFormTitle {
+    font-family: "Roboto";
+    color: blue;
     width: 100%;
     text-align: center;
     justify-self: center;
@@ -50,20 +53,26 @@
     letter-spacing: 5px;
     text-align: center;
 }
-.loginformtextbox{
+.loginFormTextInputContainer{
     display: flex;
     flex-direction: row;
+    width: 60%;
+    margin-left: 10%;
 }
-.loginLabel{
-    color: white;
+.loginLoginLabel{
+    color: blue;
     font-size: 15px;
     width: 200px;
+    font-family: "Roboto";
 }
-.loginFormTextInput {
-    width: 80%;
+.loginLoginFormTextInput {
+    width: 100%;
     background: white;
+    border-left: none;
+    border-right: none;
+    border-top: none;
     outline: none;
-    border: none;
+    border-color: blue;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 10px;
@@ -71,7 +80,7 @@
     color: blue;
     border-radius: 10px;
     font-size: 15px;
-    font-family:"Arial Rounded MT Bold";
+    font-family: "Roboto";
 }
 
 .loginformtextbox {
@@ -85,37 +94,46 @@
     color: azure;
 }
 
-.loginbutton {
-    margin-top: 10px;
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+.loginLoginbutton {
+    margin-top: 30px;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
     border-radius: 10px;
-    background:white;
+    background:blue;
     border: none;
-    color: blue;
+    color:white;
     font-weight: bolder;
     transition: 0.5s;
     padding: 10px;
     cursor: pointer;
-}
-
-.loginbutton:hover {
     box-shadow: 0px 0px 20px 1px #40739e;
 }
 
-.gotoRegisterButton{
+.loginLoginbutton:hover {
     color: white;
+    background-color: blue;
+    box-shadow: 0px 0px 20px 1px #40739e;
+}
+
+.goToAccountSelectButton{
+    color: gray;
     text-align: center;
     margin: 10px;
-    padding:10px;
+    width: 200px;
+    padding: 10px;
     border-radius: 20px;
     /*margin-left: 25%;*/
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: black;
+    background-color: white;
+    font-family: Roboto;
+
+}
+.goToAccountSelectButton:hover{
+    box-shadow: 0px 0px 20px 1px #40739e;
 }
 
 .loginError{
@@ -175,46 +193,28 @@
 
 }
 
-@media only screen and (max-width: 500px) {
-
-    .subLoginForm {
+@media only screen and (max-width: 1000px) {
+    .loginLoginImage{
         position: absolute;
-        right: 0px;
-        left: 0px;
-        top: 0px;
-        bottom: 0px;
+        width: 100px;
+        height: 100px;
+        top:50px;
+        left: 40%;
+        border-radius: 200px;
+        border: 10px solid blue;
+        box-shadow: 0px 0px 20px 1px blue;
+    }
+    .loginSubLoginForm {
+        position: absolute;
+        left: 0%;
+        bottom: 20px;
+        top:100px;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        height: 100%;
-        background-color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
         /*//#1e272e*/
-    }
-    .subLogoLoginForm{
-        display:unset;
-        position: absolute;
-        left: 0px;
-        width: 00%;
-        height: 00%;
-        background-image:unset;
-        box-shadow: unset;
-    }
-    .loginformTitle {
-        color: #40739e;
-        width: 100%;
-        text-align: center;
-        justify-self: center;
-        font-size: 30px;
-        /*margin-top: 20px;*/
-        letter-spacing: 15px;
-    }
-    .loginformDesc {
-        color: #40739e;
-        padding: 5px;
-        width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
-        font-size: 15px;
-        letter-spacing: 5px;
-        text-align: center;
-        opacity: 1;
     }
 }

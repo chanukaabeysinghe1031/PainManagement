@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './doctorLogin.css'
+// import './doctorLogin.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
 import doctorImage from "../../images/doctor.jpeg";
@@ -52,15 +52,15 @@ class DoctorLogin extends Component {
             return <Navigate to="/selectAccount"/>
         } else {
             return (
-                <div className="adminLoginForm">
-                    <img src={doctorImage} alt="logo" className="adminLoginImage" />
-                    <form className="subLoginForm" onSubmit={this.login}>
-                        <h1 className="loginformTitle">WELCOME DOCTOR</h1>
-                        <div className="loginError">{this.state.error}</div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Email</h5>
+                <div className="loginLoginForm">
+                    <img src={doctorImage} alt="logo" className="loginLoginImage" />
+                    <form className="loginSubLoginForm" onSubmit={this.login}>
+                        <h1 className="loginLoginFormTitle">WELCOME DOCTOR</h1>
+                        <div className="loginLoginError">{this.state.error}</div>
+                        <div className="loginFormTextInputContainer">
+                            <h5 className="loginLoginLabel">Email</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="loginLoginFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         loginDetails: {
@@ -74,10 +74,10 @@ class DoctorLogin extends Component {
                                 placeholder="Email"
                             />
                         </div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Password</h5>
+                        <div className="loginFormTextInputContainer">
+                            <h5 className="loginLoginLabel">Password</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="loginLoginFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         loginDetails: {
@@ -94,14 +94,14 @@ class DoctorLogin extends Component {
                         <div className="loginformtextbox">
                             <input
                                 type="submit"
-                                className="loginbutton"
+                                className="loginLoginbutton"
                                 value="Login"
                             />
                         </div>
                         <input
                             type="button"
                             onClick={() => this.setState({reDirectToAccountSelect: true})}
-                            className="gotoRegisterButton"
+                            className="goToAccountSelectButton"
                             value="Select Account Type"
                         />
                     </form>

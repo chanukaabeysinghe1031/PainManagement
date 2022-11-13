@@ -1,15 +1,35 @@
+.WelcomeMainBody{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.welcomeTitle{
+    font-size: 40px;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: blue;
+    background-color: white;
+    font-family: "Roboto";
+    border-radius: 500px;
+}
 .selectAccountMain{
     position: absolute;
-    top: 0px;
+    top: 100px;
     right: 0px;
     left: 0px;
     bottom: 0px;
-    background-color: blue;
     display: grid;
+
     grid-template-columns: 25% 25% 25% 25%;
 }
 
-.userDiv{
+.welcomeUserDiv{
     margin-left: 10%;
     margin-right: 10%;
     width: 80%;
@@ -17,27 +37,91 @@
     margin-top: 30%;
     cursor: pointer;
 }
-.userDiv:hover{
+.welcomeUserDiv:hover{
     margin-left: 10%;
     margin-right: 10%;
     width: 80%;
     height: 50%;
-    background-color: green;
     /*opacity: 0.5;*/
 }
 .userImage{
     width: 200px;
     margin-left: 15%;
     margin-top: 30%;
-    height: 200px;
     border-radius: 100%;
     opacity: 1;
     cursor: pointer;
 }
 .userImage:hover{
     opacity: 0.7;
+    border: 2px solid blue;
 }
-.userTitle{
+.welcomeUserTitle{
+    width: 100%;
     text-align: center;
-    color: white;
+    color: blue;
+    font-family: "Roboto";
+
+}
+
+@media only screen and (max-width: 1300px) {
+    body {
+    }
+    .userImage{
+        width: 150px;
+        height: 150px;
+        margin-left: 25%;
+        margin-top: 30%;
+        border-radius: 100%;
+        opacity: 1;
+        cursor: pointer;
+    }
+    .userImage:hover{
+        opacity: 0.7;
+        border: 2px solid blue;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    body {
+    }
+    .selectAccountMain{
+        position: absolute;
+        top: 100px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        display:flex;
+        flex-direction: column;
+        grid-template-columns: none;
+    }
+    .welcomeUserDiv{
+        margin-left: 30%;
+        margin-right: 10%;
+        width: 40%;
+        height: 300px;
+        margin-top: 0%;
+        cursor: pointer;
+    }
+    .welcomeUserDiv:hover{
+        margin-left: 30%;
+        margin-right: 10%;
+        width: 40%;
+        height: 300px;
+        margin-top: 0%;
+        cursor: pointer;
+    }
+
+    .userImage{
+        width: 100px;
+        height: 100px;
+        margin-left: 45%;
+        margin-top: 30%;
+        border-radius: 100%;
+        opacity: 1;
+        cursor: pointer;
+    }
+    .userImage:hover{
+        opacity: 0.7;
+        border: 2px solid blue;
+    }
 }
