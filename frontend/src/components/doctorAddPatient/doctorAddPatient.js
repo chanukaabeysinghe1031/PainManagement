@@ -23,7 +23,7 @@ class DoctorAddPatient extends Component {
                 additionalDetails: "",
             },
             reDirectToAccountSelect: false,
-            reDirectToAdminHome: false,
+            reDirectToDoctorHome:false
         }
     }
 
@@ -68,8 +68,8 @@ class DoctorAddPatient extends Component {
 
 
     render() {
-        if (this.state.reDirectToAdminHome) {
-            return <Navigate to="/adminHome"/>
+        if (this.state.reDirectToDoctorHome) {
+            return <Navigate to="/doctorHome"/>
         } else if (this.state.reDirectToAccountSelect) {
             return <Navigate to="/selectAccount"/>
         } else {
@@ -80,10 +80,10 @@ class DoctorAddPatient extends Component {
                         <h1 className="doctorHomeFormTitle">Registration of Patients</h1>
                         <div className="loginError">{this.state.error}</div>
                         <div className="doctorHomeRow">
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Admission No</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Admission No</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -94,13 +94,12 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.admissionNo}
                                     type="text"
-                                    placeholder="Admission No"
                                 />
                             </div>
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Admission Date</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Admission Date</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -111,15 +110,14 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.admissionDate}
                                     type="text"
-                                    placeholder="Admission Date"
                                 />
                             </div>
                         </div>
                         <div className="doctorHomeRow">
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">First Name</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">First Name</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -130,13 +128,12 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.firstName}
                                     type="text"
-                                    placeholder="FirstName"
                                 />
                             </div>
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Last Name</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Last Name</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -147,15 +144,14 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.lastName}
                                     type="text"
-                                    placeholder="Last Name"
                                 />
                             </div>
                         </div>
                         <div className="doctorHomeRow">
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Date of Birth</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Date of Birth</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -166,13 +162,12 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.dob}
                                     type="text"
-                                    placeholder="Date of Birth"
                                 />
                             </div>
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Address</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Address</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -183,15 +178,14 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.address}
                                     type="text"
-                                    placeholder="Address"
                                 />
                             </div>
                         </div>
                         <div className="doctorHomeRow">
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Email</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Email</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -202,13 +196,12 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.email}
                                     type="text"
-                                    placeholder="Email"
                                 />
                             </div>
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Contact Number</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Contact Number</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -219,15 +212,14 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.contactNo}
                                     type="text"
-                                    placeholder="Contact Number"
                                 />
                             </div>
                         </div>
                         <div className="doctorHomeRow">
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Disease</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Disease</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -238,13 +230,12 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.disease}
                                     type="text"
-                                    placeholder="Disease"
                                 />
                             </div>
-                            <div className="loginformtextbox">
-                                <h5 className="loginLabel">Treatment</h5>
+                            <div className="doctorTextInputContainer">
+                                <h5 className="doctorFormLabel">Treatment</h5>
                                 <input
-                                    className="loginFormTextInput"
+                                    className="doctorFormTextInput"
                                     onChange={(e) =>
                                         this.setState({
                                             patientDetails: {
@@ -255,14 +246,13 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.treatment}
                                     type="text"
-                                    placeholder="Treatment"
                                 />
                             </div>
                         </div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Additional Details</h5>
+                        <div className="doctorTextInputContainer2">
+                            <h5 className="doctorFormLabel">Additional Details</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="doctorFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         patientDetails: {
@@ -273,21 +263,18 @@ class DoctorAddPatient extends Component {
                                 }
                                 value={this.state.patientDetails.additionalDetails}
                                 type="text"
-                                placeholder="Additional Details"
-                            />
-                        </div>
-                        <div className="loginformtextbox">
-                            <input
-                                type="submit"
-                                className="loginbutton"
-                                value="Save Patient"
                             />
                         </div>
                         <input
+                            type="submit"
+                            className="doctorAddPatientButton"
+                            value="Save Patient"
+                        />
+                        <input
                             type="button"
-                            onClick={() => this.setState({reDirectToAccountSelect: true})}
-                            className="gotoRegisterButton"
-                            value="Logout"
+                            onClick={() => this.setState({reDirectToDoctorHome: true})}
+                            className="goToDoctorHomeButton"
+                            value="Back"
                         />
                     </form>
 

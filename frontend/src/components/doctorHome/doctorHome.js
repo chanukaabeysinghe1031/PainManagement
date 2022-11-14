@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './doctorHome.css'
 import {Navigate} from "react-router-dom";
-
+import Modal from 'react-bootstrap/Modal';
 
 class DoctorHome extends Component {
     constructor(props) {
@@ -9,10 +9,17 @@ class DoctorHome extends Component {
         this.state = {
             userId: "",
             reDirectToAddPatient: false,
-            reDirectToAccountSelect: false
+            reDirectToAccountSelect: false,
+            showRemovePatientModal :false,
         }
     }
 
+    handleModalClose = () => {this.setState({showRemovePatientModal:false})};
+    handleModalShow = () => {this.setState({showRemovePatientModal:true})}
+
+    removePatient = () => {
+
+    }
     render() {
         if (this.state.reDirectToAddPatient) {
             return <Navigate to="/doctorAddPatient"/>
@@ -29,6 +36,25 @@ class DoctorHome extends Component {
 
                         </div>
 
+                        <Modal show={this.state.showRemovePatientModal}>
+                            <Modal.Header>Remove Patient</Modal.Header>
+                            <Modal.Body>
+                               Do you really want to remove this patient?
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <div className="specialistAddModalAddButton"
+                                     onClick={this.removePatient}
+                                >
+                                    Yes
+                                </div>
+                                <div className="specialistAddModalCloseButton"
+                                     onClick={this.handleModalClose}
+                                >
+                                    No
+                                </div>
+                            </Modal.Footer>
+                        </Modal>
+
                         <div className="doctorHomeUserContainer">
                             <table className="doctorHomeUserTable">
                                 <tr className="doctorHomePatientRow">
@@ -38,6 +64,7 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserHeaderColumn">Email</th>
                                     <th className="doctorHomeUserHeaderColumn">Disease</th>
                                     <th className="doctorHomeUserHeaderColumn">Treatment</th>
+                                    <th className="doctorHomeUserHeaderColumn"></th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -46,6 +73,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">Accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -54,6 +84,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">Accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -62,6 +95,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">Accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -70,6 +106,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -78,6 +117,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">Accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                                 <tr className="doctorHomePatientRow">
                                     <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
@@ -86,6 +128,9 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
                                     <th className="doctorHomeUserDataColumn">Accident</th>
                                     <th className="doctorHomeUserDataColumn">Operation</th>
+                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                        Delete
+                                    </th>
                                 </tr>
                             </table>
                         </div>
