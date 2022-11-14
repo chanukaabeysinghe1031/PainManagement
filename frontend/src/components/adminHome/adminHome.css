@@ -4,10 +4,106 @@
     right: 0px;
     left: 0px;
     bottom: 0px;
-    background-color: blue;
+    background-color: white;
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
+.adminHomeMenu{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    width: 800px;
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px;
+    background-color: white;
+    border-bottom: 2px solid blue;
+}
+.adminHomeMenuItem{
+    padding: 10px;
+    text-align: center;
+    color: blue;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+}
+.adminHomeMenuItem:hover{
+    text-align: center;
+    background-color: blue;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+}
+.adminHomeUserContainer{
+    position: absolute;
+    left: 100px;
+    right: 100px;
+    top:200px;
+    bottom: 100px;
+    overflow: scroll;
+}
+.adminHomeUserTitle{
+    color: blue;
+    background-color: white;
+    border: 2px solid blue;
+    width: 200px;
+    padding: 10px;
+    margin-left: 100px;
+    text-align: center;
+    cursor: pointer;
+    font-family: Roboto;
+}
+.adminHomeUserTitle:hover{
+    color: white;
+    background-color: blue;
+    border: 2px solid blue;
+    width: 200px;
+    padding: 10px;
+    margin-left: 100px;
+    text-align: center;
+}
+.adminHomeUserTable{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    overflow: scroll;
+    font-family: Roboto;
+
+ }
+.adminHomeUserRow{
+    display: grid;
+    /*margin: 10px;*/
+    grid-template-columns: 40% 40% 20%;
+    border-bottom: 1px solid lightgray;
+}
+.adminHomePatientRow{
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 16% 16% 16% 16% 16% 16% ;
+    border-bottom: 1px solid lightgray;
+}
+.adminHomeUserHeaderColumn{
+    background-color: blue;
+    color: white;
+    font-family: Roboto;
+    padding: 10px;
+    text-align: center;
+}
+.adminHomeUserDataColumn{
+    padding: 10px;
+    /*margin-bottom: 5px;*/
+}
+.adminHomeUserDeleteButton{
+    background-color: red;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-bottom: 5px;
+}
+.adminHomeUserDeleteButton:hover{
+    box-shadow: 0px 0px 20px 1px red;
+}
+
 
 .userDiv{
     margin-left: 10%;
@@ -43,7 +139,7 @@
 }
 .adminLogoutButtonText{
     position: absolute;
-    bottom: 100px;
+    bottom: 10px;
     left: 45%;
     cursor: pointer;
     background-color: red;
@@ -52,6 +148,7 @@
     text-align: center;
     color: white;
     font-size: 20px;
+    font-family: Roboto;
 }
 .adminLogoutButtonText:hover{
     background-color: green;

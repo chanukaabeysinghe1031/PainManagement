@@ -18,6 +18,7 @@ import SpecialistHome from "./components/specialistHome/specialistHome";
 import NurseLogin from "./components/nurseLogin/nurseLogin";
 import NurseHome from "./components/nurseHome/nurseHome";
 import AddPainRecord from "./components/addPainRecord/addPainRecord";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

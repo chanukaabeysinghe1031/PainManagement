@@ -55,7 +55,7 @@ class DoctorLogin extends Component {
                 <div className="loginLoginForm">
                     <img src={doctorImage} alt="logo" className="loginLoginImage" />
                     <form className="loginSubLoginForm" onSubmit={this.login}>
-                        <h1 className="loginLoginFormTitle">WELCOME DOCTOR</h1>
+                        <h1 className="loginLoginFormTitle">Welcome Aesthetic Doctor</h1>
                         <div className="loginLoginError">{this.state.error}</div>
                         <div className="loginFormTextInputContainer">
                             <h5 className="loginLoginLabel">Email</h5>

@@ -4,12 +4,14 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
+    font-family: Roboto;
 }
 .specialistTitle{
     text-align: center;
     font-size: 25px;
     color: white;
     color: blue;
+    font-family: Roboto;
 }
 .specialistSubDiv{
     position: absolute;
@@ -17,43 +19,77 @@
     bottom: 100px;
     display: grid;
     width: 100%;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 30% 70%;
 }
-.patientSelectionPane{
+.specialistHomePatientSelectionPane{
     width: 90%;
     margin-left: 5%;
     padding: 30px;
-    background-color: blue;
     overflow: scroll;
+    border-right: 2px solid blue;
 }
-.patientContainer{
-    border-bottom: 2px solid gray;
+.specialistPatientContainer{
+    border-bottom: 1px solid lightgray;
     cursor: pointer;
     padding-top: 10px;
 }
-.patientContainer:hover{
-    background-color: red;
-}
-.patientName{
+.specialistPatientContainer:hover{
+    background-color: blue;
     color: white;
+}
+.specialistPatientName{
+    color: gray;
     font-size: 18px;
+    margin: 10px;
     text-align: center;
 }
-.patientDetails{
+.specialistHomePatientDetails{
     width: 80%;
     margin-left: 5%;
     padding: 30px;
-    border: 5px solid blue;
+    /*border: 5px solid blue;*/
     overflow: scroll;
+}
+.specialistHomePatientDetailsMenu{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    border-bottom: 10px solid blue;
+    margin-bottom: 20px;
+}
+.specialistHomePatientDetailsMenuItem{
+    text-align: center;
+    color: blue;
+    font-family: Roboto;
+    font-size: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: white;
+    cursor: pointer;
+    border-right:  1px solid lightgray;
+    border-left: 1px solid lightgray;
+}
+.specialistHomePatientDetailsMenuItem:hover{
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: blue;
+
 }
 .patientDataRow{
     display: grid;
     grid-template-columns: 40% 60%;
 }
-.dataHeader{
+.specialistDataHeader{
     color: gray;
+    font-size: 15px;
+    margin: 10px;
 }
-.data{
+.specialistPatientData{
+    font-size: 17px;
+    font-family: Roboto;
     color: blue;
 }
 .selectMessage{
@@ -62,18 +98,79 @@
     font-size: 20px;
     color: blue;
 }
-.logoutButton{
+.specialistPrescriptionTable{
+
+}
+.specialistPrescriptionHeader{
+    color: blue;
+    font-family: Roboto;
+    font-size: 20px;
+    text-align: center;
+}
+.specialistPrescriptionData{
+    font-size: 15px;
+    font-family: Roboto;
+}
+.specialistPrescriptionDataText{
+    font-size: 15px;
+    font-family: Roboto;
+    text-align: center;
+}
+.specialistHomeLogoutButton{
     position: absolute;
-    bottom: 0px;
-    width: 100%;
+    bottom: 10px;
+    width: 20%;
+    padding: 5px;
+    margin-left: 40%;
     text-align: center;
     background-color: red;
     cursor: pointer;
 }
-.logoutButton:hover{
+.specialistHomeLogoutButton:hover{
     background-color: green;
 }
 .logoutText{
     color: white;
-    font-size: 20px;
+    padding: 0px;
+    margin: 5px;
+    font-size: 15px;
+}
+.specialistAddButton{
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    padding: 5px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+.specialistAddButton:hover{
+    background-color: green;
+}
+.specialistAddInputContainer{
+    width: 100%;
+}
+.specialistAddInput{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border: 2px solid blue;
+    border-radius: 20px;
+    padding-top: 20px;
+}
+.specialistAddModalAddButton{
+    background-color: blue;
+    padding: 10px;
+    color: white;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+.specialistAddModalCloseButton{
+    background-color: red;
+    padding: 10px;
+    color: white;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
 }
