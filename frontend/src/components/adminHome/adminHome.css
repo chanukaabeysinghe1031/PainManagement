@@ -78,7 +78,7 @@
 .adminHomePatientRow{
     display: grid;
     margin: 10px;
-    grid-template-columns: 16% 16% 16% 16% 16% 16% ;
+    grid-template-columns: 400px 400px 400px 400px 400px 400px ;
     border-bottom: 1px solid lightgray;
 }
 .adminHomeUserHeaderColumn{
@@ -90,6 +90,7 @@
 }
 .adminHomeUserDataColumn{
     padding: 10px;
+    text-align: center;
     /*margin-bottom: 5px;*/
 }
 .adminHomeUserDeleteButton{

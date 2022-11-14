@@ -11,13 +11,15 @@ import AdminHome from "./components/adminHome/adminHome";
 import AddSpecialist from "./components/addSpecialist/addSpecialist";
 import AddNurse from "./components/addNurse/addNurse";
 import AddDoctor from "./components/addDoctor/addDoctor";
-import DoctorHome from "./components/doctorHome/doctorHome";
+import DoctorAddPatient from "./components/doctorAddPatient/doctorAddPatient";
 import DoctorLogin from "./components/doctorLogin/doctorLogin";
 import SpecialistLogin from "./components/specialistLogin/specialistLogin";
 import SpecialistHome from "./components/specialistHome/specialistHome";
 import NurseLogin from "./components/nurseLogin/nurseLogin";
 import NurseHome from "./components/nurseHome/nurseHome";
 import AddPainRecord from "./components/addPainRecord/addPainRecord";
+import DoctorHome from "./components/doctorHome/doctorHome";
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,13 +33,14 @@ root.render(
             <Route path="/addSpecialist" element={<AddSpecialist/>} />
             <Route path="/addNurse" element={<AddNurse/>} />
             <Route path="/addDoctor" element={<AddDoctor/>} />
-            <Route path="/doctorHome" element={<DoctorHome/>} />
+            <Route path="/doctorAddPatient" element={<DoctorAddPatient/>} />
             <Route path="/doctorLogin" element={<DoctorLogin/>} />
             <Route path="/specialistLogin" element={<SpecialistLogin/>} />
             <Route path="/specialistHome" element={<SpecialistHome/>} />
             <Route path="/nurseLogin" element={<NurseLogin/>} />
             <Route path="/nurseHome" element={<NurseHome/>} />
             <Route path="/addPainRecord" element={<AddPainRecord/>} />
+            <Route path="/doctorHome" element={<DoctorHome/>} />
         </Routes>
     </BrowserRouter>,
 );
