@@ -6,19 +6,20 @@ const bcrypt = require("bcryptjs");
 exports.addPatient =  async  (req,res) => {
     const {
         admissionNo,admissionDate,firstName,lastName,dob,address,email,
-        contactNo, disease, treatment,additionalDetails
+        contactNo, disease, treatment,additionalDetails,specialist,doctor
     } = req.body
 
     if(
         admissionNo===""||admissionDate===""||firstName===""||lastName===""||dob===""||address===""||
         email===""||contactNo===""||disease===""||treatment===""||additionalDetails===""
+        ||specialist===""||doctor===""
     ){
         res.json({Status: "Unsuccessful", Message: "All the data must be entered."})
     }else{
         console.log(email)
         const patient = new Patient({
             admissionNo,admissionDate,firstName,lastName,dob,address,email,
-            contactNo, disease, treatment,additionalDetails
+            contactNo, disease, treatment,additionalDetails,specialist,doctor
         })
 
         Patient.find({email:email})
@@ -110,3 +111,39 @@ exports.getPatients = async (req,res) => {
             })
         })
 }
+
+exports.deletePatient = async (req,res) => {
+    const {patientId} = req.body
+    if(patientId===""){
+        res.json({Status: "Unsuccessful", Message: 'Patient Id must be entered.'});
+    }else{
+        Patient.findByIdAndRemove(patientId)
+            .then(response => {
+                if(response===null){
+                    res.json({
+                        Status: "Unsuccessful",
+                        Message: "There's no patient with this id",
+                        Patients: response
+                    })
+                }else{
+                    res.json({
+                        Status: "Successful",
+                        Message: 'Patient has been deleted',
+                        Patients: response
+                    })
+                }
+                console.log(response)
+
+            })
+            .catch(error=>{
+                console.log(error)
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened deleting the patient from " +
+                        "DB.",
+                    error: error.Message
+                })
+            })
+    }
+}
+

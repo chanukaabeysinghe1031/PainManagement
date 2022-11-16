@@ -15,6 +15,7 @@ class DoctorHome extends Component {
             showRemovePatientModal :false,
             error:"",
             patients: [],
+            displayErrorModal:false,
             patientDetails: {
                 id: "",
                 admissionNo: "",
@@ -29,6 +30,7 @@ class DoctorHome extends Component {
                 treatment: "",
                 additionalDetails: "",
             },
+            deletePatientId:""
         }
     }
 
@@ -51,24 +53,57 @@ class DoctorHome extends Component {
                 const status = response.data.Status
                 const message = response.data.Message
                 if (status === "Successful") {
-                    console.log("GOT PATIENS")
                     const data = response.data.Patients;
                     this.setState({patients: data})
                 } else {
                     console.log("GOT PATIENS")
-                    this.setState({error: message})
+                    this.setState({error: message},()=>{
+                        this.handleErrorModalShow();
+                    })
                 }
             }).catch(err => {
             console.log(err)
-            this.setState({error: err})
+            this.setState({error: err},()=>{
+                this.handleErrorModalShow();
+            })
         });
     }
 
     handleModalClose = () => {this.setState({showRemovePatientModal:false})};
     handleModalShow = () => {this.setState({showRemovePatientModal:true})}
 
-    removePatient = () => {
+    handleErrorModalClose = () => {this.setState({displayErrorModal:false})};
+    handleErrorModalShow = () => {this.setState({displayErrorModal:true})}
 
+    removePatient = (patientId) => {
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+        axios.post("http://localhost:3006/api/doctors/deletePatient",{
+            patientId:this.state.deletePatientId
+        })
+            .then(response => {
+                const status = response.data.Status
+                const message = response.data.Message
+                if (status === "Successful") {
+                    console.log("Deleted PATIENS")
+                    this.setState({error: "Successfully Deleted the Patient"},()=>{
+                        this.handleErrorModalShow();
+                    })
+                    window.location.reload(true);
+                } else {
+                    this.setState({error: message},()=>{
+                        this.handleModalClose();
+                        this.handleErrorModalShow();
+                    })
+                }
+            }).catch(err => {
+            console.log(err)
+            this.setState({error: err},()=>{
+                this.handleModalClose();
+                this.handleErrorModalShow();
+            })
+        });
     }
     render() {
         if (this.state.reDirectToAddPatient) {
@@ -105,6 +140,22 @@ class DoctorHome extends Component {
                             </Modal.Footer>
                         </Modal>
 
+                        <Modal show={this.state.displayErrorModal}>
+                            <Modal.Header>Message</Modal.Header>
+                            <Modal.Body>
+                                <div className="specialistAddInputContainer">
+                                    {this.state.error}
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <div className="specialistAddModalCloseButton"
+                                     onClick={this.handleErrorModalClose}
+                                >
+                                    Close
+                                </div>
+                            </Modal.Footer>
+                        </Modal>
+
                         <div className="doctorHomeUserContainer">
                             <table className="doctorHomeUserTable">
                                 <tr className="doctorHomePatientRow">
@@ -137,7 +188,14 @@ class DoctorHome extends Component {
                                                 <th className="doctorHomeUserDataColumn">
                                                     {patient.treatment}
                                                 </th>
-                                                <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                                <th className="doctorHomeUserDeleteButton" onClick={()=>{
+                                                    this.setState({
+                                                        deletePatientId:patient._id
+                                                    },()=>{
+                                                        this.handleModalShow()
+                                                    })
+
+                                                }}>
                                                     Delete
                                                 </th>
                                             </tr>
