@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './doctorHome.css'
 import {Navigate} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
+import {default as axios} from "axios";
+import dateFormat from 'dateformat';
 
 class DoctorHome extends Component {
     constructor(props) {
@@ -11,7 +13,55 @@ class DoctorHome extends Component {
             reDirectToAddPatient: false,
             reDirectToAccountSelect: false,
             showRemovePatientModal :false,
+            error:"",
+            patients: [],
+            patientDetails: {
+                id: "",
+                admissionNo: "",
+                admissionDate: "",
+                firstName: "",
+                lastName: "",
+                dob: "",
+                address: "",
+                email: "",
+                contactNo: "",
+                disease: "",
+                treatment: "",
+                additionalDetails: "",
+            },
         }
+    }
+
+    componentDidMount() {
+        console.log("OK")
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+        this.getPatient()
+    }
+
+    getPatient = () =>{
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+        axios.post("http://localhost:3006/api/doctors/getPatients",{
+            userId:userParsed._id
+        })
+            .then(response => {
+                const status = response.data.Status
+                const message = response.data.Message
+                if (status === "Successful") {
+                    console.log("GOT PATIENS")
+                    const data = response.data.Patients;
+                    this.setState({patients: data})
+                } else {
+                    console.log("GOT PATIENS")
+                    this.setState({error: message})
+                }
+            }).catch(err => {
+            console.log(err)
+            this.setState({error: err})
+        });
     }
 
     handleModalClose = () => {this.setState({showRemovePatientModal:false})};
@@ -66,72 +116,34 @@ class DoctorHome extends Component {
                                     <th className="doctorHomeUserHeaderColumn">Treatment</th>
                                     <th className="doctorHomeUserHeaderColumn"></th>
                                 </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">Accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">Accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">Accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">Accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
-                                <tr className="doctorHomePatientRow">
-                                    <th className="doctorHomeUserDataColumn">Chanuka Abeysinghe</th>
-                                    <th className="doctorHomeUserDataColumn">334324242432FAD</th>
-                                    <th className="doctorHomeUserDataColumn">15 September,2022</th>
-                                    <th className="doctorHomeUserDataColumn">abeysinghechanuka@gmail.com</th>
-                                    <th className="doctorHomeUserDataColumn">Accident</th>
-                                    <th className="doctorHomeUserDataColumn">Operation</th>
-                                    <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
-                                        Delete
-                                    </th>
-                                </tr>
+
+                                {
+                                    this.state.patients.map((patient,index)=>{
+                                        return (
+                                            <tr className="doctorHomePatientRow">
+                                                <th className="doctorHomeUserDataColumn">
+                                                    {patient.firstName} {patient.lastName}
+                                                </th>
+                                                <th className="doctorHomeUserDataColumn">{patient.admissionNo}</th>
+                                                <th className="doctorHomeUserDataColumn">
+                                                    {dateFormat(patient.admissionDate,"mmmm dS, yyyy")}
+                                                </th>
+                                                <th className="doctorHomeUserDataColumn">
+                                                    {patient.email}
+                                                </th>
+                                                <th className="doctorHomeUserDataColumn">
+                                                    {patient.disease}
+                                                </th>
+                                                <th className="doctorHomeUserDataColumn">
+                                                    {patient.treatment}
+                                                </th>
+                                                <th className="doctorHomeUserDeleteButton" onClick={this.handleModalShow}>
+                                                    Delete
+                                                </th>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </table>
                         </div>
 

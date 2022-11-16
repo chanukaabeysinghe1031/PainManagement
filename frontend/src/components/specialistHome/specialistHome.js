@@ -4,6 +4,7 @@ import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import dateFormat from 'dateformat';
 
 const customStyles = {
     content: {
@@ -85,6 +86,7 @@ class SpecialistHome extends Component {
             this.setState({error: err})
         });
     }
+
     handleRecordsModalClose = () => {this.setState({showAddRecordsModal:false})};
     handleRecordsModalShow = () => {this.setState({showAddRecordsModal:true})}
 
@@ -320,11 +322,14 @@ class SpecialistHome extends Component {
                                                     </div>
                                                     <div className="patientDataRow">
                                                         <h4 className="specialistDataHeader">Admission Date</h4>
-                                                        <h3 className="specialistPatientData">{this.state.patientDetails.admissionDate}</h3>
+                                                        <h3 className="specialistPatientData">
+                                                            {dateFormat(this.state.patientDetails.admissionDate,"mmmm dS, yyyy")}
+                                                        </h3>
                                                     </div>
                                                     <div className="patientDataRow">
                                                         <h4 className="specialistDataHeader">Date of Birth</h4>
-                                                        <h3 className="specialistPatientData">{this.state.patientDetails.dob}</h3>
+                                                        <h3 className="specialistPatientData">
+                                                            {dateFormat(this.state.patientDetails.dob,"mmmm dS, yyyy")}</h3>
                                                     </div>
                                                     <div className="patientDataRow">
                                                         <h4 className="specialistDataHeader">Address</h4>

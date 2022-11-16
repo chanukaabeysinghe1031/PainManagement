@@ -89,3 +89,24 @@ exports.login = async (req, res) => {
             }
         })
 }
+
+exports.getPatients = async (req,res) => {
+    const {userId} = req.body
+    Patient.find({doctor:userId})
+        .then(response => {
+            res.json({
+                Status: "Successful",
+                Message: 'Patients have been received',
+                Patients: response
+            })
+        })
+        .catch(error=>{
+            console.log(error)
+            res.json({
+                Status: "Unsuccessful",
+                Message: "Happened getting the patients from " +
+                    "DB.",
+                error: error.Message
+            })
+        })
+}
