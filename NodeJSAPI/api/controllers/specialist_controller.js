@@ -37,7 +37,8 @@ exports.login = async (req, res) => {
 }
 
 exports.getPatients = async (req,res) => {
-    Patient.find()
+    const {userId} = req.body
+    Patient.find({specialist:userId})
         .then(response => {
             res.json({
                 Status: "Successful",
@@ -54,4 +55,97 @@ exports.getPatients = async (req,res) => {
                 error: error.Message
             })
         })
+}
+
+exports.addRecord = (req,res) => {
+    const {patientId,record}  = req.body
+
+    if(patientId === "" || record ===""){
+        res.json({Status: "Unsuccessful", Message: 'All data must be entered.'});
+    }else{
+        Patient.findById(patientId)
+            .then(patient=>{
+                let newRecords = patient.records
+                newRecords.push({
+                    date: Date.now(),
+                    details: record
+                })
+                patient.records = newRecords
+                Patient.findByIdAndUpdate(patientId,patient)
+                    .then(savedPatient=>{
+                        res.json({
+                            Status: "Successful",
+                            Message: 'Record has been added.',
+                            Patients: savedPatient
+                        })
+                    })
+                    .catch(error=>{
+                        console.log(error)
+                        res.json({
+                            Status: "Unsuccessful",
+                            Message: "Happened saving the patient to the " +
+                                "DB.",
+                            error: error.Message
+                        })
+                    })
+            })
+            .catch(error=>{
+                console.log(error)
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened getting the patient from " +
+                        "DB.",
+                    error: error.Message
+                })
+            })
+    }
+}
+
+exports.addPrescription = (req,res) => {
+    const {patientId,prescription,remarks}  = req.body
+
+    if(patientId === "" || prescription ===""||remarks === ""){
+        console.log(patientId,prescription,remarks)
+        res.json({Status: "Unsuccessful",
+            Message: 'All data must be entered.' +
+                patientId +" Pres "+prescription+" Remarks "+remarks});
+    }else{
+        console.log("OKOKOKO")
+        Patient.findById(patientId)
+            .then(patient=>{
+                let newPrescriptions = patient.prescriptions
+                newPrescriptions.push({
+                    date: Date.now(),
+                    prescription: prescription,
+                    remarks:remarks
+                })
+                patient.prescriptions = newPrescriptions
+                Patient.findByIdAndUpdate(patientId,patient)
+                    .then(savedPatient=>{
+                        res.json({
+                            Status: "Successful",
+                            Message: 'Prescription has been added.',
+                            Patients: savedPatient
+                        })
+                    })
+                    .catch(error=>{
+                        console.log(error)
+                        res.json({
+                            Status: "Unsuccessful",
+                            Message: "Happened saving the patient to the " +
+                                "DB.",
+                            error: error.Message
+                        })
+                    })
+            })
+            .catch(error=>{
+                console.log(error)
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened getting the patient from " +
+                        "DB.",
+                    error: error.Message
+                })
+            })
+    }
 }

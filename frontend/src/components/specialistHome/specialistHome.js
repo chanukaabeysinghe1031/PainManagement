@@ -45,7 +45,10 @@ class SpecialistHome extends Component {
             showAddPrescriptionModal :false,
             newRecord:"",
             newPrescription:"",
-            newPrescriptionRemarks:""
+            newPrescriptionRemarks:"",
+            displayErrorModal:false,
+            error:"",
+            userId:""
         }
     }
 
@@ -53,14 +56,28 @@ class SpecialistHome extends Component {
 
     componentDidMount() {
         console.log("OK")
-        axios.get("http://localhost:3006/api/specialists/getPatients")
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+       this.getPatient()
+    }
+
+    getPatient = () =>{
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+        axios.post("http://localhost:3006/api/specialists/getPatients",{
+            userId:userParsed._id
+        })
             .then(response => {
                 const status = response.data.Status
                 const message = response.data.Message
                 if (status === "Successful") {
+                    console.log("GOT PATIENS")
                     const data = response.data.Patients;
                     this.setState({patients: data})
                 } else {
+                    console.log("GOT PATIENS")
                     this.setState({error: message})
                 }
             }).catch(err => {
@@ -74,11 +91,71 @@ class SpecialistHome extends Component {
     handlePrescriptionsModalClose = () => {this.setState({showAddPrescriptionModal:false})};
     handlePrescriptionsModalShow = () => {this.setState({showAddPrescriptionModal:true})}
 
+
+    handleErrorModalClose = () => {this.setState({displayErrorModal:false})};
+    handleErrorModalShow = () => {this.setState({displayErrorModal:true})}
+
     addRecord = () =>{
-
+        if(this.state.newRecord===""){
+            this.setState({displayErrorModal:true,error:"Please add a new record"})
+        }else{
+            axios.post("http://localhost:3006/api/specialists/addRecord",{
+                patientId:this.state.patientDetails._id,
+                record:this.state.newRecord
+            })
+                .then(response => {
+                    const status = response.data.Status
+                    const message = response.data.Message
+                    if (status === "Successful") {
+                        const data = response.data.Patients;
+                        this.handleRecordsModalClose()
+                        this.getPatient()
+                        window.location.reload(true);
+                        this.setState({error:"Successfully record was added."},()=>{
+                            this.handleErrorModalShow();
+                        })
+                    } else {
+                        this.setState({error:"An error was occurred."},()=>{
+                            this.handleErrorModalShow();
+                        })
+                    }
+                }).catch(err => {
+                console.log(err)
+                this.setState({error: err})
+            });
+        }
     }
-    addPrescription = () =>{
 
+    addPrescription = () =>{
+        if(this.state.newPrescription==""||this.state.newPrescriptionRemarks==""){
+            this.setState({displayErrorModal:true,error:"Please fill al the data"})
+        }else{
+            axios.post("http://localhost:3006/api/specialists/addPrescription",{
+                patientId:this.state.patientDetails._id,
+                prescription:this.state.newPrescription,
+                remarks:this.state.newPrescriptionRemarks
+            })
+                .then(response => {
+                    const status = response.data.Status
+                    const message = response.data.Message
+                    if (status === "Successful") {
+                        console.log()
+                        const data = response.data.Patients;
+                        this.handlePrescriptionsModalClose()
+
+                        this.setState({error:"Successfully prescription was added."},()=>{
+                            this.handleErrorModalShow();
+                            this.getPatient()
+                            window.location.reload(true);
+                        })
+                    } else {
+                        this.setState({displayErrorModal:true,error:"An error was occurred."})
+                    }
+                }).catch(err => {
+                    console.log("ERROR",err)
+                    this.setState({error: err})
+                });
+        }
     }
     render() {
         if (this.state.reDirectToAdminHome) {
@@ -181,6 +258,22 @@ class SpecialistHome extends Component {
                             </Modal.Footer>
                         </Modal>
 
+                        <Modal show={this.state.displayErrorModal}>
+                            <Modal.Header>Message</Modal.Header>
+                            <Modal.Body>
+                                <div className="specialistAddInputContainer">
+                                    {this.state.error}
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <div className="specialistAddModalCloseButton"
+                                     onClick={this.handleErrorModalClose}
+                                >
+                                    Close
+                                </div>
+                            </Modal.Footer>
+                        </Modal>
+
                         <div className="specialistHomePatientDetails">
                             <div className="specialistHomePatientDetailsMenu">
                                 <h6 className="specialistHomePatientDetailsMenuItem" onClick={() => {
@@ -269,18 +362,16 @@ class SpecialistHome extends Component {
                                                     </div>
                                                     <div className="specialistPrescriptionTable">
                                                         <h6 className="specialistPrescriptionHeader">Records</h6>
-                                                        <div className="specialistPrescriptionData">
-                                                            <h6 className="specialistPrescriptionDataText">Record 1</h6>
-                                                        </div>
-                                                        <div className="specialistPrescriptionData">
-                                                            <h6 className="specialistPrescriptionDataText">Record 2</h6>
-                                                        </div>
-                                                        <div className="specialistPrescriptionData">
-                                                            <h6 className="specialistPrescriptionDataText">Record 3</h6>
-                                                        </div>
-                                                        <div className="specialistPrescriptionData">
-                                                            <h6 className="specialistPrescriptionDataText">Record 4</h6>
-                                                        </div>
+
+                                                        {
+                                                            this.state.patientDetails.records.map((record,index)=>{
+                                                                return(
+                                                                    <div className="specialistPrescriptionData">
+                                                                        <h6 className="specialistPrescriptionDataText">{record.details}</h6>
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
                                                     </div>
                                                 </div>
                                                 :
@@ -294,18 +385,18 @@ class SpecialistHome extends Component {
                                                         <h7 >Add Prescription</h7>
                                                     </div>
                                                     <h6 className="specialistPrescriptionHeader">Prescriptions</h6>
-                                                    <div className="specialistPrescriptionData">
-                                                        <h6 className="specialistPrescriptionDataText">Prescription 1</h6>
-                                                    </div>
-                                                    <div className="specialistPrescriptionData">
-                                                        <h6 className="specialistPrescriptionDataText">Prescription 2</h6>
-                                                    </div>
-                                                    <div className="specialistPrescriptionData">
-                                                        <h6 className="specialistPrescriptionDataText">Prescription 3</h6>
-                                                    </div>
-                                                    <div className="specialistPrescriptionData">
-                                                        <h6 className="specialistPrescriptionDataText">Prescription 4</h6>
-                                                    </div>
+                                                    {this.state.patientDetails.prescriptions.map((prescription,index)=>{
+                                                        return(
+                                                            <div className="specialistPrescriptionData">
+                                                                <h6 className="specialistPrescriptionDataText">
+                                                                    Prescription: {prescription.prescription}
+                                                                </h6>
+                                                                <h6 className="specialistPrescriptionDataText">
+                                                                    Remarks: {prescription.remarks}
+                                                                </h6>
+                                                            </div>
+                                                        )
+                                                    })}
                                                 </div>
                                                 :
                                                 <div></div>

@@ -110,6 +110,7 @@
 .specialistPrescriptionData{
     font-size: 15px;
     font-family: Roboto;
+    border-bottom: 1px solid lightgray;
 }
 .specialistPrescriptionDataText{
     font-size: 15px;

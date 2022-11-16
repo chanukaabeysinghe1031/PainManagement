@@ -6,7 +6,15 @@ const patientsSchema = new mongoose.Schema({
     },
     admissionDate:{
         type: Date,
-        required :  true
+        required : Date.now()
+    },
+    specialist:{
+        type:String,
+        required:true
+    },
+    doctor:{
+        type:String,
+        required:true
     },
     firstName:{
         type:String,
@@ -47,7 +55,7 @@ const patientsSchema = new mongoose.Schema({
     painsDetected: [{
         date:{
             type: Date,
-            required :  true
+            required : Date.now()
         },
         details:{
             type: String,
@@ -57,7 +65,31 @@ const patientsSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-      }]
+      }],
+    records:[{
+        date:{
+            type: Date,
+            required :  true
+        },
+        details:{
+            type: String,
+            required: true
+        },
+    }],
+    prescriptions:[{
+        date:{
+            type: Date,
+            required :  true
+        },
+        prescription:{
+            type: String,
+            required: true
+        },
+        remarks:{
+            type: String,
+            required: true
+        },
+    }]
 })
 
 

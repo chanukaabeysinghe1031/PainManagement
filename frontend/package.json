@@ -9,6 +9,8 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.2",
     "react": "^18.1.0",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.1.0",
     "react-equal-height": "^1.2.2",
