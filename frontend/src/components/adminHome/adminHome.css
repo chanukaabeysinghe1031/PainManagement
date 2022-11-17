@@ -18,13 +18,73 @@
     background-color: white;
     border-bottom: 2px solid blue;
 }
-.adminHomeMenuItem{
+.adminHomeMenuItem1{
     padding: 10px;
     text-align: center;
     color: blue;
     font-family: Roboto;
     font-size: 15px;
     cursor: pointer;
+}
+.adminHomeMenuItem2{
+    padding: 10px;
+    text-align: center;
+    color: blue;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+}
+.adminHomeMenuItem3{
+    padding: 10px;
+    text-align: center;
+    color: blue;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+}
+.adminHomeMenuItem4{
+    padding: 10px;
+    text-align: center;
+    color: blue;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+}
+.selectedAdminHomeMenuItem1{
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: blue;
+}
+.selectedAdminHomeMenuItem2{
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: blue;
+}
+.selectedAdminHomeMenuItem3{
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: blue;
+}
+.selectedAdminHomeMenuItem4{
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: blue;
 }
 .adminHomeMenuItem:hover{
     text-align: center;

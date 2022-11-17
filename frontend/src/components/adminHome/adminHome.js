@@ -20,10 +20,10 @@ class AdminHome extends Component {
             reDirectToAddSpecialist: false,
             reDirectToAccountSelect:false,
             userId:"",
-            displayDoctors:false,
+            displayDoctors:true,
             displayNurses:false,
             displaySpecialists:false,
-            displayPatients:true,
+            displayPatients:false,
             specialists:[],
             doctors:[],
             nurses:[],
@@ -34,7 +34,11 @@ class AdminHome extends Component {
             showRemoveNurseModal:false,
             deleteDoctor:"",
             deleteSpecialist:"",
-            deleteNurse:""
+            deleteNurse:"",
+            menuItemStyle1:"selectedAdminHomeMenuItem1",
+            menuItemStyle2:"adminHomeMenuItem2",
+            menuItemStyle3:"adminHomeMenuItem3",
+            menuItemStyle4:"adminHomeMenuItem4"
         }
     }
 
@@ -253,36 +257,52 @@ class AdminHome extends Component {
                     </Modal>
                     <div className="adminHomeMain">
                         <div className="adminHomeMenu">
-                            <h6 className="adminHomeMenuItem" onClick={()=>{
+                            <h6 className={this.state.menuItemStyle1} onClick={()=>{
                                 this.setState({
                                     displayDoctors:true,
                                     displayNurses:false,
                                     displaySpecialists:false,
-                                    displayPatients:false
+                                    displayPatients:false,
+                                    menuItemStyle1:"selectedAdminHomeMenuItem1",
+                                    menuItemStyle2:"adminHomeMenuItem2",
+                                    menuItemStyle3:"adminHomeMenuItem3",
+                                    menuItemStyle4:"adminHomeMenuItem4"
                                 })
                             }}>Doctors</h6>
-                            <h6 className="adminHomeMenuItem" onClick={()=>{
+                            <h6 className={this.state.menuItemStyle2} onClick={()=>{
                                 this.setState({
                                     displayDoctors:false,
                                     displayNurses:false,
                                     displaySpecialists:true,
-                                    displayPatients:false
+                                    displayPatients:false,
+                                    menuItemStyle2:"selectedAdminHomeMenuItem2",
+                                    menuItemStyle1:"adminHomeMenuItem1",
+                                    menuItemStyle3:"adminHomeMenuItem3",
+                                    menuItemStyle4:"adminHomeMenuItem4"
                                 })
                             }}>Specialists</h6>
-                            <h6 className="adminHomeMenuItem" onClick={()=>{
+                            <h6 className={this.state.menuItemStyle3} onClick={()=>{
                                 this.setState({
                                     displayDoctors:false,
                                     displayNurses:true,
                                     displaySpecialists:false,
-                                    displayPatients:false
+                                    displayPatients:false,
+                                    menuItemStyle3:"selectedAdminHomeMenuItem3",
+                                    menuItemStyle1:"adminHomeMenuItem1",
+                                    menuItemStyle2:"adminHomeMenuItem2",
+                                    menuItemStyle4:"adminHomeMenuItem4"
                                 })
                             }}>Nurses</h6>
-                            <h6 className="adminHomeMenuItem" onClick={()=>{
+                            <h6 className={this.state.menuItemStyle4} onClick={()=>{
                                 this.setState({
                                     displayDoctors:false,
                                     displayNurses:false,
                                     displaySpecialists:false,
-                                    displayPatients:true
+                                    displayPatients:true,
+                                    menuItemStyle4:"selectedAdminHomeMenuItem4",
+                                    menuItemStyle1:"adminHomeMenuItem1",
+                                    menuItemStyle2:"adminHomeMenuItem2",
+                                    menuItemStyle3:"adminHomeMenuItem3",
                                 })
                             }}>Patients</h6>
                         </div>
