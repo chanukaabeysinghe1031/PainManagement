@@ -3,6 +3,7 @@ import './nurseHome.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
 import doctorImage from "../../images/doctor.jpeg";
+import dateFormat from 'dateformat';
 
 
 class NurseHome extends Component {
@@ -109,11 +110,18 @@ class NurseHome extends Component {
                                         </div>
                                         <div className="nursePatientDataRow">
                                             <h4 className="nurseDataHeader">Admission Date</h4>
-                                            <h3 className="nurseData">{this.state.patientDetails.admissionDate}</h3>
+                                            <h3 className="nurseData">
+                                                {dateFormat(
+                                                    this.state.patientDetails.admissionDate,
+                                                    "mmmm dS, yyyy"
+                                                )}
+                                            </h3>
                                         </div>
                                         <div className="nursePatientDataRow">
                                             <h4 className="nurseDataHeader">Date of Birth</h4>
-                                            <h3 className="nurseData">{this.state.patientDetails.dob}</h3>
+                                            <h3 className="nurseData">
+                                                {dateFormat(this.state.patientDetails.dob,"mmmm dS, yyyy")}
+                                            </h3>
                                         </div>
                                         <div className="nursePatientDataRow">
                                             <h4 className="nurseDataHeader">Address</h4>
@@ -135,8 +143,41 @@ class NurseHome extends Component {
                                             <h4 className="nurseDataHeader">Additional Details</h4>
                                             <h3 className="nurseData">{this.state.patientDetails.additionalDetails}</h3>
                                         </div>
-                                        <div className="nursePatientDataRow">
-
+                                        <div className="nursePatientDataRow2">
+                                            <h4 className="nurseDataHeader2">Records of Pain Detection</h4>
+                                            {this.state.patientDetails.painsDetected.map((pain,index)=>{
+                                                return(
+                                                    <div className="nursePainRecords">
+                                                        <div className="nursePainRecordRow">
+                                                            <h3 className="nurseDataHeader3">
+                                                                Date
+                                                            </h3>
+                                                            <h3 className="nurseData3">
+                                                                {dateFormat(
+                                                                    pain.date,
+                                                                    "mmmm dS, yyyy"
+                                                                )}
+                                                            </h3>
+                                                        </div>
+                                                        <div className="nursePainRecordRow">
+                                                            <h3 className="nurseDataHeader3">
+                                                                Details
+                                                            </h3>
+                                                            <h3 className="nurseData3">
+                                                                {pain.details}
+                                                            </h3>
+                                                        </div>
+                                                        <div className="nursePainRecordRow">
+                                                            <h3 className="nurseDataHeader3">
+                                                                Treatment
+                                                            </h3>
+                                                            <h3 className="nurseData3">
+                                                                {pain.treatment}
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
                                     </div>
 
