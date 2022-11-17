@@ -1,62 +1,63 @@
-const AestheticDoctor  = require('../models/aestheticDoctor')
+const AestheticDoctor = require('../models/aestheticDoctor')
 const Patient = require('../models/patient')
+const Specialist = require("../models/specialist")
 const bcrypt = require("bcryptjs");
 
 // ************************* To register a seller account **************************
-exports.addPatient =  async  (req,res) => {
+exports.addPatient = async (req, res) => {
     const {
-        admissionNo,admissionDate,firstName,lastName,dob,address,email,
-        contactNo, disease, treatment,additionalDetails,specialist,doctor
+        admissionNo, admissionDate, firstName, lastName, dob, address, email,
+        contactNo, disease, treatment, additionalDetails, specialist, doctor
     } = req.body
 
-    if(
-        admissionNo===""||admissionDate===""||firstName===""||lastName===""||dob===""||address===""||
-        email===""||contactNo===""||disease===""||treatment===""||additionalDetails===""
-        ||specialist===""||doctor===""
-    ){
+    if (
+        admissionNo === "" || admissionDate === "" || firstName === "" || lastName === "" || dob === "" || address === "" ||
+        email === "" || contactNo === "" || disease === "" || treatment === "" || additionalDetails === ""
+        || specialist === "" || doctor === ""
+    ) {
         res.json({Status: "Unsuccessful", Message: "All the data must be entered."})
-    }else{
+    } else {
         console.log(email)
         const patient = new Patient({
-            admissionNo,admissionDate,firstName,lastName,dob,address,email,
-            contactNo, disease, treatment,additionalDetails,specialist,doctor
+            admissionNo, admissionDate, firstName, lastName, dob, address, email,
+            contactNo, disease, treatment, additionalDetails, specialist, doctor
         })
 
-        Patient.find({email:email})
-        .then(oldPatient=>{
-            if(oldPatient.length>0){
+        Patient.find({email: email})
+            .then(oldPatient => {
+                if (oldPatient.length > 0) {
+                    res.json({
+                        Status: "Unsuccessful",
+                        Message: "There is a patient with this email address already."
+                    })
+                } else {
+                    patient.save()
+                        .then(response => {
+                            res.json({
+                                Status: "Successful",
+                                Message: 'Patient has been savedsuccessfully.',
+                                User: response
+                            })
+                        })
+                        .catch(error => {
+                            res.json({
+                                Status: "Unsuccessful",
+                                Message: "Happened saving the patient in " +
+                                    "DB.",
+                                error: error.Message
+                            })
+                        })
+                }
+            })
+            .catch(error => {
+                console.log("HI" + error)
                 res.json({
                     Status: "Unsuccessful",
-                    Message: "There is a patient with this email address already."
+                    Message: "Happened finding the patient in " +
+                        "DB.",
+                    error: error
                 })
-            }else{
-                patient.save()
-                    .then(response=>{
-                        res.json({
-                            Status: "Successful",
-                            Message: 'Patient has been savedsuccessfully.',
-                            User: response
-                        })
-                    })
-                    .catch(error=>{
-                        res.json({
-                            Status: "Unsuccessful",
-                            Message: "Happened saving the patient in " +
-                                "DB.",
-                            error: error.Message
-                        })
-                    })
-            }
-        })
-        .catch(error=>{
-            console.log("HI"+error)
-            res.json({
-                Status: "Unsuccessful",
-                Message: "Happened finding the patient in " +
-                    "DB.",
-                error: error
             })
-        })
     }
 }
 // ****************************** To login to a doctor account ******************************
@@ -91,9 +92,9 @@ exports.login = async (req, res) => {
         })
 }
 
-exports.getPatients = async (req,res) => {
+exports.getPatients = async (req, res) => {
     const {userId} = req.body
-    Patient.find({doctor:userId})
+    Patient.find({doctor: userId})
         .then(response => {
             res.json({
                 Status: "Successful",
@@ -101,7 +102,7 @@ exports.getPatients = async (req,res) => {
                 Patients: response
             })
         })
-        .catch(error=>{
+        .catch(error => {
             console.log(error)
             res.json({
                 Status: "Unsuccessful",
@@ -112,20 +113,20 @@ exports.getPatients = async (req,res) => {
         })
 }
 
-exports.deletePatient = async (req,res) => {
+exports.deletePatient = async (req, res) => {
     const {patientId} = req.body
-    if(patientId===""){
+    if (patientId === "") {
         res.json({Status: "Unsuccessful", Message: 'Patient Id must be entered.'});
-    }else{
+    } else {
         Patient.findByIdAndRemove(patientId)
             .then(response => {
-                if(response===null){
+                if (response === null) {
                     res.json({
                         Status: "Unsuccessful",
                         Message: "There's no patient with this id",
                         Patients: response
                     })
-                }else{
+                } else {
                     res.json({
                         Status: "Successful",
                         Message: 'Patient has been deleted',
@@ -135,7 +136,7 @@ exports.deletePatient = async (req,res) => {
                 console.log(response)
 
             })
-            .catch(error=>{
+            .catch(error => {
                 console.log(error)
                 res.json({
                     Status: "Unsuccessful",
@@ -146,4 +147,5 @@ exports.deletePatient = async (req,res) => {
             })
     }
 }
+
 

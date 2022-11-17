@@ -3,11 +3,13 @@ import './doctorAddPatient.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
 import doctorImage from "../../images/doctor.jpeg";
-
+import Dropdown from 'react-bootstrap/Dropdown';
 
 class DoctorAddPatient extends Component {
     constructor(props) {
         super(props);
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
         this.state = {
             patientDetails: {
                 admissionNo: "",
@@ -21,11 +23,39 @@ class DoctorAddPatient extends Component {
                 disease: "",
                 treatment: "",
                 additionalDetails: "",
+                selectedSpecialist:"",
+                doctor:userParsed._id
             },
+            specialists:[],
             reDirectToAccountSelect: false,
             reDirectToDoctorHome:false
         }
     }
+
+    componentDidMount() {
+        console.log("OK")
+        const user = localStorage.getItem("user")
+        const userParsed = JSON.parse(user)
+        this.setState({userId:userParsed._id})
+        axios.post("http://localhost:3006/api/specialists/getSpecialists")
+            .then(response => {
+                const status = response.data.Status
+                const message = response.data.Message
+                if (status === "Successful") {
+                    const data = response.data.Specialists;
+                    this.setState({specialists: data})
+                } else {
+                    console.log("GOT PATIENS")
+                    this.setState({error: message},()=>{
+                        this.handleErrorModalShow();
+                    })
+                }
+            }).catch(err => {
+            console.log(err)
+            this.setState({error: err})
+        });
+    }
+
 
     login = (event) => {
         event.preventDefault();
@@ -110,6 +140,7 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.admissionDate}
                                     type="text"
+                                    placeholder="yyyy.mm.dd"
                                 />
                             </div>
                         </div>
@@ -162,6 +193,7 @@ class DoctorAddPatient extends Component {
                                     }
                                     value={this.state.patientDetails.dob}
                                     type="text"
+                                    placeholder="yyyy.mm.dd"
                                 />
                             </div>
                             <div className="doctorTextInputContainer">
@@ -265,6 +297,37 @@ class DoctorAddPatient extends Component {
                                 type="text"
                             />
                         </div>
+
+                        <div className="doctorTextInputContainer2">
+                            <h5 className="doctorFormLabel">Select the Specialist</h5>
+                            <Dropdown className="dropDown">
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    Dropdown Button
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    {
+                                        this.state.specialists.map((specialist,index)=>{
+                                            return(
+                                                <Dropdown.Item onClick={()=>{
+                                                    this.setState({
+                                                        patientDetails: {
+                                                            ...this.state.patientDetails,
+                                                            specialist: specialist._id
+                                                        }
+                                                    })
+                                                }}>
+
+                                                    {specialist.fullName}
+                                                </Dropdown.Item>
+
+                                            )
+                                        })
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+
                         <input
                             type="submit"
                             className="doctorAddPatientButton"

@@ -149,3 +149,23 @@ exports.addPrescription = (req,res) => {
             })
     }
 }
+
+exports.getSpecialists = (req, res) => {
+    Specialist.find()
+        .then(specialists => {
+            res.json({
+                Status: "Successful",
+                Message: 'Specialists have been deleted',
+                Specialists: specialists
+            })
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({
+                Status: "Unsuccessful",
+                Message: "Happened finding the specialists from " +
+                    "DB.",
+                error: error.Message
+            })
+        })
+}
