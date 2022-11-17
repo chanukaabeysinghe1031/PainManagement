@@ -274,3 +274,131 @@ exports.login = async (req, res) => {
         })
 }
 
+exports.getPersons = (req,res)=>{
+    Specialist.find()
+        .then(specialists=>{
+            Nurse.find()
+                .then(nurses=>{
+                    AestheticDoctor.find()
+                        .then(doctors=>{
+                            Patient.find()
+                                .then(patients=>{
+                                    res.json({
+                                        Status: "Successful",
+                                        Message: 'Admin has been logged successfully.',
+                                        Specialists: specialists,
+                                        Doctors:doctors,
+                                        Nurses:nurses,
+                                        Patients:patients
+                                    })
+                                })
+                                .catch(error=>{
+                                    res.json({
+                                        Status: "Unsuccessful",
+                                        Message: "Happened finding the Patients in " +
+                                            "DB.",
+                                        error: error
+                                    })
+                                })
+
+                        })
+                        .catch(error=>{
+                            res.json({
+                                Status: "Unsuccessful",
+                                Message: "Happened finding the Aesthetic Doctors in " +
+                                    "DB.",
+                                error: error
+                            })
+                        })
+                })
+                .catch(error=>{
+                    res.json({
+                        Status: "Unsuccessful",
+                        Message: "Happened finding the Nurses in " +
+                            "DB.",
+                        error: error
+                    })
+                })
+        })
+        .catch(error=>{
+            res.json({
+                Status: "Unsuccessful",
+                Message: "Happened finding the  Specialists in " +
+                    "DB.",
+                error: error
+            })
+        })
+}
+
+exports.deleteDoctor = (req,res) => {
+    const {id} = req.body
+    if(id===""){
+        res.json({Status: "Unsuccessful", Message: 'Id must be entered.'});
+    }else{
+        AestheticDoctor.findByIdAndDelete(id)
+            .then(deletedDoctor=>{
+                res.json({
+                    Status: "Successful",
+                    Message: 'Doctor has been deleted succesfully.',
+                    Doctor:deletedDoctor
+                })
+            })
+            .catch(error=>{
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened deleting the  Doctor in " +
+                        "DB.",
+                    error: error
+                })
+            })
+    }
+}
+
+exports.deleteSpecialist = (req,res) => {
+    const {id} = req.body
+    if(id===""){
+        res.json({Status: "Unsuccessful", Message: 'Id must be entered.'});
+    }else{
+        Specialist.findByIdAndDelete(id)
+            .then(deletedSpecialist=>{
+                res.json({
+                    Status: "Successful",
+                    Message: 'Specialist has been deleted succesfully.',
+                    Doctor:deletedSpecialist
+                })
+            })
+            .catch(error=>{
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened deleting the  Specialist in " +
+                        "DB.",
+                    error: error
+                })
+            })
+    }
+}
+
+exports.deleteNurse = (req,res) => {
+    const {id} = req.body
+    if(id===""){
+        res.json({Status: "Unsuccessful", Message: 'Id must be entered.'});
+    }else{
+        Nurse.findByIdAndDelete(id)
+            .then(deletedNurse=>{
+                res.json({
+                    Status: "Successful",
+                    Message: 'Nurse has been deleted succesfully.',
+                    Doctor:deletedNurse
+                })
+            })
+            .catch(error=>{
+                res.json({
+                    Status: "Unsuccessful",
+                    Message: "Happened deleting the  Nurse in " +
+                        "DB.",
+                    error: error
+                })
+            })
+    }
+}
+
