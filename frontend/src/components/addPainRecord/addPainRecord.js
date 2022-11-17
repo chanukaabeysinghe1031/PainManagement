@@ -28,6 +28,7 @@ class AddPainRecord extends Component {
         ) {
             this.setState({error: "Please Fill all Required Fields"})
         } else {
+            console.log("DETAILS",this.state.painDetails)
             axios.post("http://localhost:3006/api/nurses/addPainRecord",this.state.painDetails )
                 .then(response => {
                     const status = response.data.Status
@@ -52,14 +53,14 @@ class AddPainRecord extends Component {
             return <Navigate to="/nurseHome"/>
         } else {
             return (
-                <div className="adminLoginForm">
-                    <form className="subLoginForm" onSubmit={this.login}>
-                        <h1 className="loginformTitle">Add Pain Record</h1>
+                <div className="addPainRecordForm">
+                    <form className="subAddPainForm" onSubmit={this.login}>
+                        <h1 className="addPainFormTitle">Add Pain Record</h1>
                         <div className="loginError">{this.state.error}</div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Date</h5>
+                        <div className="addPainFormInputContainer">
+                            <h5 className="addPainLabel">Date</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="addPainFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         painDetails: {
@@ -70,13 +71,13 @@ class AddPainRecord extends Component {
                                 }
                                 value={this.state.painDetails.date}
                                 type="text"
-                                placeholder="Date"
+                                placeholder="YYYY.MM.DD"
                             />
                         </div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Details</h5>
+                        <div className="addPainFormInputContainer">
+                            <h5 className="addPainLabel">Details</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="addPainFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         painDetails: {
@@ -89,10 +90,10 @@ class AddPainRecord extends Component {
                                 placeholder="Details"
                             />
                         </div>
-                        <div className="loginformtextbox">
-                            <h5 className="loginLabel">Treatment</h5>
+                        <div className="addPainFormInputContainer">
+                            <h5 className="addPainLabel">Treatment</h5>
                             <input
-                                className="loginFormTextInput"
+                                className="addPainFormTextInput"
                                 onChange={(e) =>
                                     this.setState({
                                         painDetails: {
@@ -105,17 +106,17 @@ class AddPainRecord extends Component {
                                 placeholder="Treatment"
                             />
                         </div>
-                        <div className="loginformtextbox">
+                        <div className="addPainFormInputContainer">
                             <input
                                 type="submit"
-                                className="loginbutton"
+                                className="addPainButton"
                                 value="Record pain of the patient"
                             />
                         </div>
                         <input
                             type="button"
                             onClick={() => this.setState({reDirectToAccountSelect: true})}
-                            className="gotoRegisterButton"
+                            className="painAddGoBackButton"
                             value="Back"
                         />
                     </form>

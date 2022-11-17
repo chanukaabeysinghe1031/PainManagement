@@ -54,15 +54,17 @@ exports.addPainRecord =  async  (req,res) => {
                         Message: "There is no patient with this id."
                     })
                 }else{
-                    let newPains = []
+                    let newPains =patient.painsDetected
+                    console.log(date)
                     newPains = patient.painsDetected
                     newPains.push({
                         date:date,
-                        details:details,
+                        details:"fasfsafas",
                         treatment:treatment
                     })
                     patient.painsDetected = newPains
-                    patient.save()
+                    console.log("NEW PATIENT",newPains)
+                    Patient.findByIdAndUpdate(patientId,patient)
                         .then(savedPatient=>{
                             res.json({
                                 Status: "Successful",
@@ -71,6 +73,7 @@ exports.addPainRecord =  async  (req,res) => {
                             })
                         })
                         .catch(error=>{
+                            console.log(error)
                             res.json({
                                 Status: "Unsuccessful",
                                 Message: "Happened saving the patient in " +
@@ -90,4 +93,24 @@ exports.addPainRecord =  async  (req,res) => {
                 })
             })
     }
+}
+
+exports.getPatients = async (req,res) => {
+    Patient.find()
+        .then(response => {
+            res.json({
+                Status: "Successful",
+                Message: 'Patients have been received',
+                Patients: response
+            })
+        })
+        .catch(error=>{
+            console.log(error)
+            res.json({
+                Status: "Unsuccessful",
+                Message: "Happened getting the patients from " +
+                    "DB.",
+                error: error.Message
+            })
+        })
 }

@@ -1,17 +1,19 @@
-.specialistHome{
+.nurseHome{
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
+    font-family: Roboto;
 }
-.specialistTitle{
+.nurseTitle{
     text-align: center;
     font-size: 25px;
     color: white;
     color: blue;
+    margin-top: 20px;
 }
-.specialistSubDiv{
+.nurseSubDiv{
     position: absolute;
     top: 100px;
     bottom: 100px;
@@ -19,42 +21,51 @@
     width: 100%;
     grid-template-columns: 50% 50%;
 }
-.patientSelectionPane{
+.nursePatientSelectionPane{
     width: 90%;
     margin-left: 5%;
     padding: 30px;
-    background-color: blue;
+    background-color: white;
     overflow: scroll;
 }
-.patientContainer{
+.nursePatientSelectionPane{
     border-bottom: 2px solid gray;
     cursor: pointer;
     padding-top: 10px;
 }
-.patientContainer:hover{
-    background-color: red;
+.nursePatientContainer{
+    padding: 10px;
+     border-bottom: 1px solid lightgray;
+    color: blue;
 }
-.patientName{
+.nursePatientContainer:hover{
+    background-color: blue;
     color: white;
+}
+.nursePatientName{
     font-size: 18px;
     text-align: center;
 }
-.patientDetails{
+.nursePatientDetails{
     width: 80%;
     margin-left: 5%;
+    margin-top: 20px;
     padding: 30px;
-    border: 5px solid blue;
+    border: 1px solid blue;
     overflow: scroll;
 }
-.patientDataRow{
+.nursePatientDataRow{
     display: grid;
     grid-template-columns: 40% 60%;
 }
-.dataHeader{
+.nurseDataHeader{
+    font-size: 13px;
     color: gray;
+    text-align: center;
 }
-.data{
+.nurseData{
     color: blue;
+    font-size: 18px;
 }
 .selectMessage{
     text-align: center;
@@ -62,10 +73,11 @@
     font-size: 20px;
     color: blue;
 }
-.logoutButton{
+.nurseLogoutButton{
     position: absolute;
-    bottom: 0px;
-    width: 100%;
+    bottom: 20px;
+    margin-left: 30%;
+    width: 40%;
     text-align: center;
     background-color: red;
     cursor: pointer;
@@ -77,16 +89,18 @@
     color: white;
     font-size: 20px;
 }
-.observeButton{
+.nurseObserveButton{
     color: white;
     margin-top: 10px;
+    margin-bottom: 30px;
     margin-left: 10px;
     background-color: blue;
     padding-top: 10px;
-    height: 30px;
+    height: 50px;
     text-align: center;
     border-radius: 20px;
     cursor: pointer;
+    font-size: 15px;
 }
 .observeButton:hover{
     background-color: green;

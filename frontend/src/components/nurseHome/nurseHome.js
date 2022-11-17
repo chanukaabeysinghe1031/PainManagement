@@ -31,7 +31,7 @@ class NurseHome extends Component {
     }
     componentDidMount() {
         console.log("OK")
-        axios.get("http://localhost:3006/api/specialists/getPatients")
+        axios.get("http://localhost:3006/api/nurses/getPatients")
             .then(response => {
             const status = response.data.Status
             const message = response.data.Message
@@ -57,80 +57,85 @@ class NurseHome extends Component {
             return <Navigate to="/addPainRecord"/>
         }else {
             return (
-                <div className="specialistHome">
-                    <h4 className="specialistTitle">Observe Patients</h4>
-                    <div className="specialistSubDiv">
-                        <div className="patientSelectionPane">
+                <div className="nurseHome">
+                    <h4 className="nurseTitle">Observe Patients</h4>
+                    <div className="nurseSubDiv">
+                        <div className="nursePatientSelectionPane">
                             {
                                 this.state.patients.map((element,index)=>{
                                     return (
-                                        <div className="patientContainer" onClick={()=>{
+                                        <div className="nursePatientContainer" onClick={()=>{
                                             this.setState({
                                                 patientDetails:element
                                             })
                                         }}>
-                                            <h6 className="patientName">{element.firstName} {element.lastName}</h6>
+                                            <h6 className="nursePatientName">{element.firstName} {element.lastName}</h6>
                                         </div>
                                     )
                                 })
                             }
                         </div>
-                        <div className="patientDetails">
+                        <div className="nursePatientDetails">
                             {
                                 this.state.patientDetails.firstName===""?
                                     <h5 className="selectMessage">Please select a patient.</h5>
                                     :
                                     <div>
-                                        <div className="patientDataRow">
-                                            <a href="localhost:8501" target="_blank" className="observeButton">Observe</a>
-                                            <h4 className="observeButton" onClick={()=>{
+                                        <div className="nursePatientDataRow">
+                                            <a
+                                                href="localhost:8501"
+                                                target="_blank"
+                                                className="nurseObserveButton">
+                                                Observe
+                                            </a>
+                                            <h4 className="nurseObserveButton" onClick={()=>{
                                                 localStorage.setItem('patientId', this.state.patientDetails._id)
                                                this.setState({reDirectToAddPainRecord:true})
                                             }}>
                                                 Add Pain Record
                                             </h4>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">First Name</h4>
-                                            <h3 className="data">{this.state.patientDetails.firstName}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">First Name</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.firstName}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Last Name</h4>
-                                            <h3 className="data">{this.state.patientDetails.lastName}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Last Name</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.lastName}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Admission No</h4>
-                                            <h3 className="data">{this.state.patientDetails.admissionNo}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Admission No</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.admissionNo}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Admission Date</h4>
-                                            <h3 className="data">{this.state.patientDetails.admissionDate}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Admission Date</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.admissionDate}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Date of Birth</h4>
-                                            <h3 className="data">{this.state.patientDetails.dob}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Date of Birth</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.dob}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Address</h4>
-                                            <h3 className="data">{this.state.patientDetails.address}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Address</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.address}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Contact No</h4>
-                                            <h3 className="data">{this.state.patientDetails.contactNo}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Contact No</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.contactNo}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Disease</h4>
-                                            <h3 className="data">{this.state.patientDetails.disease}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Disease</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.disease}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Treatment</h4>
-                                            <h3 className="data">{this.state.patientDetails.treatment}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Treatment</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.treatment}</h3>
                                         </div>
-                                        <div className="patientDataRow">
-                                            <h4 className="dataHeader">Additional Details</h4>
-                                            <h3 className="data">{this.state.patientDetails.additionalDetails}</h3>
+                                        <div className="nursePatientDataRow">
+                                            <h4 className="nurseDataHeader">Additional Details</h4>
+                                            <h3 className="nurseData">{this.state.patientDetails.additionalDetails}</h3>
                                         </div>
-                                        <div className="patientDataRow">
+                                        <div className="nursePatientDataRow">
 
                                         </div>
                                     </div>
@@ -138,7 +143,7 @@ class NurseHome extends Component {
                             }
                         </div>
                     </div>
-                    <div className="logoutButton" onClick={()=>{
+                    <div className="nurseLogoutButton" onClick={()=>{
                         this.setState({
                             reDirectToAccountSelect:true
                         })

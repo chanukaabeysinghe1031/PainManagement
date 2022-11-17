@@ -55,7 +55,7 @@ const patientsSchema = new mongoose.Schema({
     painsDetected: [{
         date:{
             type: Date,
-            required : Date.now()
+            required : true
         },
         details:{
             type: String,

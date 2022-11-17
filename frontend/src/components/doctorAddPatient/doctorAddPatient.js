@@ -69,7 +69,6 @@ class DoctorAddPatient extends Component {
                     if (status === "Successful") {
                         const data = response.data.User;
                         console.log(data)
-                        localStorage.setItem('user', JSON.stringify(data))
                         this.setState({
                             patientDetails: {
                                 admissionNo: "",
