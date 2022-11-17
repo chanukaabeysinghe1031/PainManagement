@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './addDoctor.css'
 import {Navigate} from "react-router-dom";
 import {default as axios} from "axios";
 import specialistImage from "../../images/specialist.jpeg";
